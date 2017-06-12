@@ -34,7 +34,7 @@ Version|1.0
 
 #### 服务方法规则配置
 服务ID|方法名称|条件脚本|返回报文
----|---|---|---|---
+---|---|---|---
 1|pushOnlineStock|any|json
 1|testMethod|arg.warehId=='HQ01W500'|json
 
