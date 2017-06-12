@@ -1,0 +1,1608 @@
+@charset "utf-8";
+/******以下是默认的设置,你可以随便修改********/
+
+/*****************************************************************
+******************************************************************
+以下为所有风格通用样式
+margin: 0;padding: 0;设置外边距,内边距空隙都为0
+font-size: 12px;为字体大小.一般表格内的,不受他控制
+li,ul设置list-style: none;主要是取消默认的小圆点.不太好看
+******************************************************************
+*****************************************************************/
+
+.intervalDiv {
+    width: 100%;
+    height: 6px;
+}
+
+.bg {
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    -moz-opacity: 0.7;
+    opacity: .70;
+    filter: alpha(opacity = 70);
+}
+
+.spanleft {
+    display: inline;float: left;
+}
+
+.spanright {
+    display: inline;float: right;
+}
+
+#show {
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 22%;
+    width: 53%;
+    height: 49%;
+    padding: 8px;
+    border: 8px solid #E8E9F7;
+    background-color: white;
+    z-index: 999;
+    overflow: auto;
+}
+
+.checkpass {
+    background-color: #beddff;
+    width: auto;
+    height: 26px;
+    line-height: 26px;
+    padding: 0px 5px 0px 5px;
+    text-align: right;
+}
+
+.checkfail {
+    background-color: #e91e63;
+    width: auto;
+    height: 26px;
+    line-height: 26px;
+    padding: 0px 5px 0px 5px;
+    text-align: right;
+}
+
+body, ul, p, dl, dd, dt, h {
+    padding: 6px;
+    margin: 0px;
+    font-size: 14px;
+    font-family: "微软雅黑";
+}
+
+.queryitem {
+    width: 15%;
+    background-color: #eee;
+    text-align:right;
+    padding: 4px 8px 4px 8px;
+}
+
+.queryButtonTd {
+    width: 67px;
+    padding: 3px;
+    white-space: inherit;
+}
+
+.buttonTd {
+    width: 67px;
+}
+
+.deleteButton {
+    background-color:white;
+    height: 20px;
+    line-height: 18px;
+    width: 67px;
+    border:1px solid #ccc;
+}
+
+.deleteButton:hover {
+    background-color: red;
+}
+
+.addButton {
+    background-color:white;
+    height: 26px;
+    line-height: 24px;
+    width: 67px;
+}
+
+.addButton:hover {
+    background-color: palegreen;
+}
+
+.deleteButtonOneRow {
+    background-color:white;
+    height: 20px;
+    line-height: 18px;
+    width: 67px;
+    margin: 3px 0px 0px 0px;
+}
+
+.deleteButtonOneRow:hover {
+    background-color: red;
+}
+
+.updateButton {
+    background-color:white;
+    height: 20px;
+    line-height: 18px;
+    width: 67px;
+}
+
+.addTrButton {
+    background-color:white;
+    height: 22px;
+    width: 22px;
+    text-indent:0px;
+    background:transparent url("../css/images/addButton.png");
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    background-position: 0px 0px;
+    border: 0px;
+/*     position: fixed;
+    clip: rect(0px 22px 22px 0px);
+    margin: -11px 0px 0px -11px; */
+}
+
+.addTrButton:active { 
+    background-size:98% 99%
+}
+
+.deleteTrButton {
+    background-color:white;
+    height: 9px;
+    width: 22px;
+    text-indent:0px;
+    background:transparent url("../css/images/deleteButton.png");
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    background-position: 0px 0px;
+    border: 0px;
+/*     position: fixed;
+    clip: rect(7px 22px 15px 0px);
+    margin: -11px 0px 0px -11px; */
+}
+
+.addTrTd {
+    width: 27px;
+    padding: 0px;
+    text-align: center;
+    vertical-align: middle;
+    border-top: 0px;
+}
+
+.fixedHeader {
+    padding-right: 17px;
+}
+
+.updateButton:hover {
+    background-color: yellow;
+}
+
+
+.serviceStatusTd {
+    width: 60px;
+}
+
+.serviceStatusButton {
+    background-color:white;
+    height:20px;
+    width: 67px;
+    line-height: 18px;
+    border:1px solid #ccc;
+}
+
+.runningButton:hover {
+    background-color: chartreuse;
+}
+
+.stopButton:hover {
+    background-color: red;
+}
+
+.serviceStatusInput {
+    text-align:center;
+    width:67px;
+    text-indent:0px;
+    padding: 0px;
+    border: 0px;
+    height: 20px;
+    line-height: 18px;
+}
+
+.running {
+    background-color: chartreuse;
+}
+
+.stop {
+    background-color: red;
+}
+
+.openButton {
+    width:54px;
+    background-color:white;
+    height: 20px;
+    line-height: 20px;
+    border:0px;
+}
+
+
+.updateInput {
+    padding: 0px;
+    border: 0px;
+    height: 26px;
+    width:100%;
+    text-indent:4px;
+    line-height: 26px;
+}
+
+.updateDiv {
+    padding: 0px;
+    border: 0px;
+    height: 20px;
+    text-indent:2px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.updateDiv2Row {
+    padding: 0px 0px 0px 2px;
+    border: 0px;
+    height: 43px;
+    line-height: 19px;
+    text-indent:0px;
+    white-space:pre;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.mockTestMethodRuleDiv {
+    padding: 0px 0px 0px 0px;
+    border: 0px;
+    height: auto;
+    line-height: 19px;
+    text-indent:0px;
+    white-space:pre-wrap;
+    word-wrap:break-word; 
+    word-break:break-word;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.divWidth300 {
+    width: 300px;
+}
+
+.divWidth100 {
+    width: 100px;
+}
+
+.divWidth50 {
+    width: 50px;
+}
+
+.divWidth30 {
+    width: 30px;
+}
+
+.width85 {
+    width: 85%;
+    padding: 3px;
+}
+
+.updateTd {
+    padding: 0px 0px 0px 0px;
+    border-top: 0px;
+}
+
+.deleteButton:hover {
+    background-color: red;
+}
+
+h1 {
+    padding: 4px;
+    margin: 0px;
+    font-size: 30px;
+    font-family: "微软雅黑";
+    color: #333;
+}
+
+.tdtable {
+    margin: 0px;
+}
+
+h3 {
+    padding: 3px 6px 3px 3px;
+    margin: 0px;
+    font-size: 15px;
+    font-family: "微软雅黑";
+    height: 20px;
+    line-height: 20px;
+}
+
+.logintable {
+    width: 230px;
+    margin: auto;
+}
+
+.logintable input{
+    width: 100%;
+    padding: 0px;
+}
+
+.top {
+    background-color: #eee;
+    padding: 0;
+}
+
+.top .rightitem {
+    width: 140px;
+    font-size: 12px;
+    padding: 22px 4px 0 0;
+    text-align: center;
+    border: 0px;
+}
+
+.top .middleitem {
+    width: auto;
+    text-align: center;
+    line-height: 32px;
+    height: 32px;
+    padding: 0px;
+    border: 0px;    
+}
+
+.logintable .error{
+    color:red; 
+    padding: 0 4px 0 0;
+}
+
+h4 {
+    padding: 0px 4px;
+    margin: 0px;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    color: #333;
+}
+
+h5 {
+    padding: 4px 4px 0px 4px;
+    margin: 0px;
+    font-size: 13px;
+    font-family: "微软雅黑";
+    color: #333;
+}
+
+
+li,ul {
+    list-style: none;
+}
+
+table {
+    margin:0px;
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+    padding: 0px;
+}
+
+form {
+   margin: 0px 0px 0px 0px;
+}
+
+textarea {
+    width: 100%;
+    height: 170px;
+    margin: 0px 0px 0px 0px;
+    padding: 2px 4px;
+    resize: none;
+    overflow: auto;
+    word-break: break-all;
+    font: 13.3333px Arial;
+    position: inherit;
+    text-indent: 0px;
+    border:solid #ccc 1px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+/******************************************
+TD中的color: #333333;为没有超级链接的字体颜色
+VERTICAL-ALIGN: top;表格里的内容居顶
+text-align:left;表格里的内容居左
+*******************************************/
+TD {
+    margin: 0px;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    width:auto;
+    border: solid #ccc 1px;
+    VERTICAL-ALIGN: inherit;
+    text-align:left;
+    color: #222;
+    white-space:nowrap;/* 不换行 */
+    padding: 3px;
+    height: 18px;
+    line-height: 18px;
+}
+
+.itemtr:hover
+{
+    background-color:#e3f3fb;
+}
+
+.cur {
+    background-color:#eee !important;
+}
+
+.alignright{
+    text-align: right;
+}
+
+th {
+    margin: 0px;
+    padding: 2px 2px 2px 2px;
+    font-size: 13px;
+    font-family: "微软雅黑";
+    border: solid #ccc 1px;
+    VERTICAL-ALIGN: middle;
+    text-align:center;
+    color: #222;
+    width: auto;
+    white-space:nowrap;/* 不换行 */
+    height:22px;
+    line-height: 22px;
+}
+
+.itemth {
+    margin: 0px;
+    padding: 2px 2px 2px 2px;
+    font-size: 13px;
+    font-family: "微软雅黑";
+    border: solid #ccc 1px;
+    VERTICAL-ALIGN: middle;
+    text-align:left;
+    color: #222;
+    width: auto;
+    white-space:nowrap;/* 不换行 */
+    height:22px;
+    line-height: 22px;
+    font-weight: bold;
+}
+
+.overflowTable {
+    table-layout: fixed;  
+    width: 100% border:0px;
+}
+
+.overflowTable tr td {
+    /* for IE */
+    text-overflow: ellipsis;
+    /* for Firefox,mozilla */ 
+    -moz-text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+} 
+
+.itemth:hover
+{
+    background-color:#e3f3fb;
+
+}
+
+/******************************************
+border:1px solid #ccc; 表单边框为1个像素的实线,
+要为虚线改solid为dotted,要换颜色改#ccc
+可以自定义背景颜色
+background:#eee;
+*******************************************/
+
+input {
+    border:1px solid #ccc;
+    height:26px;
+    width:242px;
+    padding: 0px;
+    text-indent: 4px;
+    font: 13.3333px Arial;
+    line-height: 26px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+ select {
+    border:1px solid #ccc;
+    height:26px;
+    width:242px;
+    padding: 0px;
+    font: 13.3333px Arial;
+    line-height: 26px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+button {
+    height:26px;
+    width: 67px;
+    line-height: 24px;
+    border:1px solid #ccc;
+    cursor:pointer;
+}
+
+input[type=radio] {
+    height:13px;
+    width: 67px;
+    line-height: 13px;
+    vertical-align: sub;
+    padding: 0px;
+    margin: 0px;
+}
+
+input[type=checkbox] {
+    height:16px;
+    width: 16px;
+    line-height: 16px;
+    vertical-align: sub;
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.checkboxtd {
+    width: 26px;
+    text-align: center;
+}
+
+.orderbutton {
+    height: 100%;
+    width: 100%;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    line-height: 20px;
+    border:0px;
+    padding: 0px 0px 0px 0px;
+    background: white;
+}
+
+.remark {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 0px;
+    
+}
+
+.involveOrder {
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 0px;
+    
+}
+
+#divcenter{
+    position:absolute;/*层漂浮*/
+    top:50%;
+    left:50%;
+    width:340px;
+    height:340px;
+    margin-top:-210px;/*注意这里必须是DIV高度的一半*/
+    margin-left:-170px;/*这里是DIV宽度的一半*/
+}
+
+#ooo {
+    position: relative;
+    width: 97px;
+}
+
+#ooo .tips {
+    word-break:keep-all;/* 不换行 */
+    white-space:nowrap;/* 不换行 */
+    width:auto;
+    min-width:99px;
+    padding: 0 3px 0 5px;
+    height: auto;
+    line-height:22px;
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    display: none;
+    background: #edf4fa;
+    z-index: 100;
+    border-width: 1px;
+    border-style: inset;
+    border-color: #111;
+}
+
+button:hover {
+    background: #edf4fa;
+}
+
+#ooo:hover .tips {
+    display: block;
+}
+
+#navigation {
+    font-family: Arial;
+    width: auto;
+}
+
+#navigation ul {
+    list-style-type: none; /* 不显示项目符号 */
+    margin: 0px;
+    padding: 0px;
+}
+
+#navigation li {
+    border-bottom: 1px solid #bbb; /* 添加下划线 */
+}
+
+#navigation li a {
+    display: block; /* 区块显示 */
+    padding: 5px 5px 5px 0.5em;
+    text-decoration: none;
+    border-left: 12px solid #ccc; /* 左边的粗红边 */
+    border-right: 0px solid #ccc; /* 右侧阴影 */
+    width: auto; /* xg_超连接以外的部分也触发CSS样式效果 */
+}
+
+
+#navigation li a:hover { /* 鼠标经过时 */
+    background-color: #666; /* 改变背景色 */
+    color: #fff; /* 改变文字颜色 */
+}
+
+/******************************************
+网页整体宽度
+******************************************/
+.wrap{
+    width:auto;
+    margin:auto;
+}
+/*横幅广告*/
+#banner_ad{
+    margin-top:5px;
+}
+/******************************************
+font-size: 12px;超级链接字体大小
+color:字体颜色
+text-decoration: none;没有下画线.要有下画线.改none为underline
+a 为统一超级链接,
+a:link没有点击过的超级链接样式
+a:visited 被点击过的超级链接样式
+a:hover 鼠标指向时的超级链接样式
+a:active 被用户激活(在鼠标点击与释放之间发生的事件)时的样式.少用
+*******************************************/
+
+a {
+    font-size: 12px;
+}
+a:link {
+    color: #333333;
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+    color: #333333;
+}
+a:hover {
+    text-decoration: underline;
+    color: #4E667B;
+}
+a:active {
+    text-decoration: none;
+}
+
+/******************************************
+#toplogin 网页顶部登录框表格ID编号
+background表格背景颜色
+height高度
+*******************************************/
+
+#toplogin{
+    background:#E3F5FC;
+    height:20px;
+}
+#toplogin .jstime{
+    margin-top:5px;
+    margin-right:5px;
+}
+/******************************************
+#toplogin input.login_name用户名表单,
+#toplogin input.login_pwd密码表单,写在一行,用,号分开共用样式
+width:90px;表单宽
+height:15px;表单高
+*******************************************/
+
+#toplogin input.login_name,#toplogin input.login_pwd{
+    width:90px;
+    height:15px;
+}
+
+/******************************************
+#toplogin input.login_sub提交按钮表单,
+width:90px;表单宽
+height:15px;表单高
+background:#D2E4FC;    背景颜色
+*******************************************/
+
+#toplogin input.login_sub{
+    width:90px;
+    height:15px;
+    background:#D2E4FC;
+}
+
+/******************************************
+#header div 头部LOGO与广告图的容器,
+float:left;靠左排列
+
+#header div.ad广告容器,样式指定了靠右
+*******************************************/
+
+#header div{
+    float:left;
+}
+#header div.ad{
+    float:right;
+}
+
+/******************************************
+#header头部大表格
+margin-bottom:10px;与下面的表格距离10像素
+border-top:#ccc 1px solid;表格上方一个像素的实线,颜色为#ccc,
+可以把solid改成虚线dotted
+#header td 大表格内的TD
+padding-top:8px;上方留空8个像素
+*******************************************/
+
+#header{
+    margin-bottom:10px;
+    border-top:#ccc 1px solid;
+}
+#header td{
+    padding-top:8px;
+}
+
+/******************************************
+#guide头部网站导航表格编号
+margin-top:5px;与上方表格距离5像素
+border:1px #6B92D6 solid;边框样式solid改为dotted则为虚线
+height:28px;高度
+background:#D2E4FC;背景颜色
+#guide td导航表格内部TD容器
+border:1px solid #FFF;内边框样式
+padding:6px 3px 4px 3px;导航文字与上右下左的距离
+*******************************************/
+
+#guide{
+    margin-top:5px;
+    border:1px #6B92D6 solid;
+    height:28px;
+    background:#D2E4FC url(head1.gif);
+}
+#guide td{
+    border:1px solid #FFF;
+    padding:6px 3px 4px 3px;
+}
+#guide2{
+    background:#F5FAFE;
+    height:24px;
+    border-bottom:1px #A7CAFA solid;
+}
+#guide2 td{
+    padding-top:6px;
+    padding-left:2px;
+}
+.chooseGuide{
+    border-bottom:1px dotted #333;
+}
+/******************************************
+.MainTable .guide样式导航表格样式
+margin-top:5px;与上方表格的距离
+border:1px #A7CAFA solid;边框样式,solid可更换成dotted虚线
+height:20px;表格高度
+background:#F5FAFE;表格背景颜色
+
+.MainTable .guide td{ padding:5px; 表格内的文字距离四周的间距
+可改成 padding:5px 0 0 0;指上右下左
+*******************************************/
+
+.MainTable .guide{
+    margin-top:5px;
+    border:1px #A7CAFA solid;
+    height:20px;
+    background:#F5FAFE url(head2.gif);
+}
+.MainTable .guide td{
+    padding:5px;
+}
+
+
+/*****************************************************************
+******************************************************************
+内容大表格模块样式
+width:100%;占满整个空间宽度
+margin-top:5px;与上一个表格间距为5个像素
+overflow:hide;内容超过时,将隐藏.不过上面用百分比,一般这里设置无效.
+只有上面用具体像素,这里才生效
+border:1px #A7CAFA solid;边框样式,1个像素,可以改solid为虚线dotted,要取消边框改1px为0px
+******************************************************************
+******************************************************************/
+
+.dragTable{
+    width:100%;
+    margin-top:5px;
+    overflow:hide;
+    border:1px #A7CAFA solid;
+    
+}
+
+/******************************************
+内容表格模块头部样式
+background:#D2E4FC;背景颜色
+height:20px;高度
+padding-left:1em;字体与左边距离
+padding-top:7px;字体与上方距离
+border:1px #FFF solid;内边框样式,一般设置为0px较多,即不要内边框居多
+******************************************/
+
+.dragTable .head{
+    background:#D2E4FC url(head.gif);
+    height:20px;
+    padding-left:1em;
+    padding-top:7px;
+    border:1px #FFF solid;
+}
+
+/******************************************
+模块主题文字
+float:left;居左,
+可以设置为粗体 font-weight:bold;颜色为color:#000;
+******************************************/
+
+.dragTable .TAG{
+    float:left;
+ 
+ 
+}
+.dragTable .TAG a{
+ 
+}
+
+/*文章列表的更多*/
+
+.dragTable .more a{
+ 
+    margin-right:1em;
+}
+/******************************************
+整体大表格之间的间隙
+******************************************/
+.MainTable{
+    margin-top:5px;
+}
+/******************************************
+右边窄表格模块样式
+width:98%;宽度
+line-height:17px;字体行高
+******************************************/
+
+.MainTable .Side .dragTable{
+    width:100%;
+}
+
+.MainTable .Side .dragTable .middle{
+    line-height:18px;
+}
+
+/******************************************
+内容模块主体部分
+padding:8px;距离四周距离为8个像素,
+可以改成更具体些的padding:8px 0 0 0;即上右下左的距离
+line-height:20px;行高,即是使用<br>换行符时的文字行高
+******************************************/
+
+.dragTable .middle{
+    padding:8px 0px 0px 0px;
+    height:50px;
+    line-height:20px;
+}
+
+/******************************************
+右边窄表格最新,最热的内容样式.
+    width:210px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+通过设定固定宽度,使控制自动隐藏超出边界的内容自动隐藏,用省略号表示
+只对<ul><li>有效
+******************************************/
+
+.MainTable .Side .dragTable .middle ul li{
+    width:210px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+/******************************************
+右边窄表格最新,最热的标题样式.
+必须<ul><li>有超链接的才有效
+display:block;定义链接为实体,方便做效果处理
+margin-left:4px;文字与左边大表格边框的距离
+text-indent:0.6em;文字与小图标的距离
+background:url(title_icon3.gif) no-repeat left;    右边列表,最热,最新等等标题前面的小图标
+no-repeat 不平铺 left;背景居左
+******************************************/
+
+.MainTable .Side .dragTable .middle ul li a{
+    display:block;
+    margin-left:4px;
+    text-indent:0.6em;
+    background:url(title_icon3.gif) no-repeat left;
+}
+
+
+/******************************************
+列表页,包括首页,文章子栏目文章表格样式,表格高度
+******************************************/
+#AutoRows .dragTable .middle{
+    height:100px;
+    padding-top:0px;
+    padding-bottom:0px;
+}
+
+/******************************************
+列表页,包括首页,文章子栏目文章标题样式
+    width:246px;
+    display:block;
+    overflow:hidden;
+    text-overflow:ellipsis;
+定义width指定宽度.是为了自动隐藏超出边界的标题.用百分比不能控制
+line-height:18px;行高
+text-indent:0.6em;文字小图标的距离
+background:url(title_icon3.gif) no-repeat ;标题前的小图标
+background-position: 0 40%;    小图标X,Y的坐标
+
+
+    width:246px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+******************************************/
+
+#AutoRows .dragTable ul li{
+    display:block;
+    line-height:18px;
+    text-indent:0.6em;
+    background:url(title_icon3.gif) no-repeat 0 40% ;
+}
+
+#AutoRows .dragTable .list_title{
+    line-height:18px;
+    text-indent:0.6em;
+    background:url(title_icon3.gif) no-repeat 0 40% ;
+}
+
+/******************************************
+文章中列表页中的图片主题,图片列表
+.listpic每张图的占位空间
+width:127px;占位宽度127像素
+padding:3px 0 3px 4px;内间隙距离上右下左
+float:left;居左排列
+.listpic .title图片底下的标题样式
+    width:127px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+固定了宽度,控制自动隐藏超出边界的文字
+******************************************/
+
+.listpic{
+    width:127px;
+    padding:3px 0 3px 4px;
+    float:left;
+}
+.listpic .title{
+    width:127px;
+    text-align:center;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+/******************************************
+文章中列表页中的图片主题,图片内边框样式
+border:1px #FFF solid;边框一个像素,为实线,可以改0px,即取消内边框
+改solid为dotted即是虚线
+******************************************/
+
+.listpic img{
+    border:1px #FFF solid;
+    width:120px;
+    height:90px;
+}
+
+/******************************************
+文章中列表页中的图片主题,图片外边框样式
+width:120px;    图片外边框宽 height:90px;    图片外边框高
+display:block;    定义链接为实体利于加效果
+text-align :center;    图片在边框内居中
+border:1px #ccc solid;图片外边框样式,要取消边框,可以把1改0,
+要加粗粗,把1改成更大的数,要用虚线,可以把solid改成dotted,要换颜色修改#ccc为其他的
+margin-bottom:5px;            与底部文字的距离
+******************************************/
+
+.listpic .img a{
+    width:120px;
+    height:90px;
+    display:block;
+    text-align :center;
+    border:1px #ccc solid;
+    margin-bottom:5px;
+}
+
+/******************************************
+文章列表
+padding:7px 5px 0 5px;内间隙,上右下左的距离
+border-bottom:1px dashed #ccc;底部虚线,也可改为实线solid 或其他颜色
+
+.listarticle span参数样式
+******************************************/
+
+.listarticle td{
+    padding:7px 5px 0 5px;
+    border-bottom:1px dashed #ccc;
+}
+.listarticle span{
+    display:block;
+    float:left;
+}
+
+/******************************************
+文章列表
+文章标题样式
+text-indent: 0.6em;与小图标的距离
+background:url(title_icon3.gif) no-repeat left;小图标,居左不平铺
+background-position: 0em 40%;小图标是背景,坐标位置
+
+.listarticle span.time{float:right;}时间靠右显示
+******************************************/
+
+.listarticle span.title{
+    text-indent: 0.6em;
+    background:url(title_icon3.gif) no-repeat left;
+    background-position: 0em 40%;
+}
+.listarticle span.time{
+    float:right;
+}
+
+/*****************************************************************
+******************************************************************
+文章内容页
+.content_word,.content_word p多种格式的控制内容的样式,字号为15像素
+******************************************************************
+******************************************************************/
+.content_word,.content_word p{
+    font-size:15px;
+}
+
+/*****************************************************************************************
+******************************************************************************************
+图片频道,视频,FLASH,音乐,商城,下载频道的列表页的图片列表
+******************************************************************************************
+******************************************************************************************/
+/******************************************
+display:block;定义为模块
+width:98%;宽度为98%
+margin:8px 8px 0 10px;与其他的外间隙上右下左的距离
+height:100px;高度
+overflow:hide;文字超过则隐藏,不过上面宽度只有设置成具体像素才生效.
+border-bottom:1px #ccc dotted;底部边框为一个像素的虚线.改成solid则为实线,改成0px则取消边框
+这里特别要注意的是.把宽度改成width:44%;增加一句float:left;就可以一行显示两个
+******************************************/
+
+.ListPhoto ul{
+    display:block;
+    width:98%;
+    margin:8px 8px 0px 10px;
+    height:100px;
+    overflow:hide;
+    border-bottom:1px #ccc dotted;
+}
+
+/******************************************
+图片与介绍文字是左右并排
+******************************************/
+
+.ListPhoto ul li{
+    display:block;
+    float:left;
+}
+
+/******************************************
+图片容器样式,
+width:130px;宽
+border-right:1px #ccc dotted;容器右边样式,改dotted为solid则为实线,把1px改为0则取消边框
+******************************************/
+
+.ListPhoto ul li.img{
+    width:130px;
+    border-right:1px #ccc dotted;
+}
+
+/******************************************
+图片内边框样式
+******************************************/
+
+.ListPhoto ul li.img img{
+    border:1px solid #ccc;
+}
+
+/******************************************
+图片外边框样式
+    display:block;    定义为实体,方便加效果
+    width:120px;    宽
+    height:90px;    高
+    text-align :center; 图片居中
+    background:#eee;    背景颜色,只有图片太小时,才看得到效果.
+    border:1px solid #333; 外边框样式,可改solid为dotted虚线.取消边框的话.改1px为0
+******************************************/
+
+.ListPhoto ul li.img a{
+    display:block;
+    width:120px;
+    height:90px;
+    text-align :center;
+    background:#eee;
+    border:1px solid #333;
+}
+
+/******************************************
+图片的相关文字样式
+margin-left:1em;与左边距离1个汉字距离
+******************************************/
+
+.ListPhoto ul li.word{
+    margin-left:1em;
+}
+
+/******************************************
+图片的相关文字样式
+display:block;做为实体,每个占一行,
+overflow:hide,文字超出边界,自动隐藏.一般只有设置了宽度时才生效
+******************************************/
+
+.ListPhoto ul li.word span{
+    display:block;
+    overflow:hide;
+}
+
+/******************************************
+图片的相关文字,超级链接的文字加粗显示
+******************************************/
+
+.ListPhoto ul li.word span.title a{
+    font-weight:bold;
+}
+
+/*****************************************************************************************
+*****************************************************************************************
+**********评论
+******************************************************************************************
+******************************************************************************************/
+
+#comment .content{
+    border:dotted 1px #ddd;
+    margin-bottom:10px;
+}
+#comment .content .word{
+    border-bottom:solid 1px #ddd;
+    padding-left:5px;
+    height:50px;
+}
+#comment .content .img{
+    border-right:dotted 1px #ddd;
+    padding:1em;
+}
+#comment .content .info{
+    padding:2px 0 0 5px;
+}
+
+/*****************************************************************************************
+*****************************************************************************************
+************留言本
+*****************************************************************************************
+*****************************************************************************************/
+
+.guestbook{
+    margin-bottom:4px;
+    border:1px dotted #A7CAFA;
+}
+.guestbook .Ftd{
+    padding:4px;
+    border-right:1px dotted #A7CAFA;
+}
+.guestbook .Atd{
+    border-top:1px solid #D2E4FC;
+    padding-left:4px;
+}
+.guestbook .Ctd{
+    padding:4px;
+}
+
+/*****************************************************************************************
+*****************************************************************************************
+网页底部
+******************************************************************************************
+******************************************************************************************/
+
+#footer{
+    border-top:#CBCBCB solid 1px;
+    margin-top:4px;
+}
+#footer td{
+    padding:1em 0 1em 0;
+}
+
+
+/*****************************************************************************************
+*****************************************************************************************
+间隔条
+*****************************************************************************************
+*****************************************************************************************/
+.Space{
+    height:23px;
+    margin-top:4px;
+    background:url(space_bg.jpg);
+}
+.Space .L{
+    padding:5px 0 0 5px;
+    font-weight:bold;
+    color:#FFF;
+}
+.Space .L{
+    float:left;
+}
+.Space .R{
+    padding:5px 5px 0 0;
+    float:right;
+}
+
+
+
+/*********************************************************************
+**********************************************************************
+AJAX在线编辑DIV容器
+这个会员看不到.只是版主管理员才可以看到.这是后台风格
+一般不必修改了.修改了会员也看不到
+**********************************************************************
+*********************************************************************/
+#AjaxEditTable{
+    border:1px solid #BEDDFF;
+    background:#FFF;
+}
+#AjaxEditTable .head{
+    height: 21px;
+    background: #DBEAFF;
+    border-bottom:1px solid #BEDDFF;
+    padding:3px 5px 0 7px;
+}
+#AjaxEditTable .head a{
+    color:#FFF;
+}
+#AjaxEditTable .head span{
+    DISPLAY: block; 
+    FLOAT: right;
+}
+#AjaxEditTable .middle{
+    background:#FFF;
+    line-height:18px;
+    padding:5px;
+}
+#AjaxEditTable .middle input,#AjaxEditTable .middle textarea{
+    border:1px solid #BEDDFF;
+    background:#FFF;
+}
+
+/*列表栏目名称*/
+.showsortname{
+    background:url(article_elite.gif) no-repeat 0.3em 0;
+    padding-left:0.3em;
+    text-indent:1.5em;
+    font-weight:bold;
+    float:left;
+}
+
+/*列表页,标题+图片+内容的显示样式*/
+.list_sortTCP{
+    margin-bottom:12px;
+    width:99%;
+}
+.list_sortTCP .pic{
+    padding-right:1em;
+}
+.list_sortTCP .content{
+    border-bottom:1px dotted #ccc;
+    text-indent:2em;
+}
+
+/*列表页,标题+内容的显示样式*/
+.list_sortTC{
+    margin-bottom:5px;
+    width:99%;
+    border-bottom:1px dotted #ccc;
+}
+.list_sortTC .content{
+    text-indent:2em;
+}
+
+/******************************************
+分页
+******************************************/
+
+.page {
+    font: 12px Arial, Helvetica, sans-serif;
+    margin:0px;
+    float:right;
+    width: auto;
+    line-height: 28px;
+    height: 28px;
+}
+.page td{
+    border:0px;
+    text-align: center;
+}
+
+.page a {
+    padding: 1px 6px;
+    border: solid 1px #ddd;
+    background: #fff;
+    text-decoration: none;
+    margin-right: 0px;
+    vertical-align: middle;
+}
+
+.page .active a {
+    color: red;
+    border: none;
+}
+
+.page a:visited {
+    padding: 1px 6px;
+    border: solid 1px #ddd;
+    background: #fff;
+    text-decoration: none;
+}
+
+.page a:hover {
+    color: #fff;
+    background: #ffa501;
+    border-color: #ffa501;
+    text-decoration: none;
+}
+
+.page .input_li {
+    padding: 0px;
+    font-size: 12px;
+    font-family: "微软雅黑";
+}
+
+.page .disabled {
+    cursor:default;
+}
+
+/*下拉菜单的背景颜色与透明度设置*/
+#menuTable{
+    background:#F5FCFE;
+    border:1px solid #A7CAFA;
+    filter:Alpha(Opacity=80);
+}
+#menuTable td{
+    padding:3px 0px 3px 5px;
+    line-height:15px;
+}
+
+/*弹出层样式*/
+.popdiv {
+    width:80%;
+    height:auto;
+    max-height:80%;
+    top:10%;
+    left:10%;  
+    z-index:999;
+    padding:5px;
+    border:1px solid black;
+    background-color: white;
+    overflow: auto;
+    position:absolute;
+    border: solid #ffffff 1px;
+    
+}
+
+.textareaDiv {
+    width: 100%;
+    height: 193px;
+    margin: 0px;
+    padding: 0px;
+    resize: none;
+    overflow:auto;  
+    word-break:break-all;
+    position: inherit;
+    text-indent: 0px;
+    border-width: 0px;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    white-space: pre;
+    line-height: 19px;
+}
+
+.tdSelect {
+    width: 100%;
+    border: 0px;
+}
+
+.detailDiv {
+    width:300px;
+    height:195px;
+    top:10%;
+    left:10%;  
+    z-index:1002;
+    border:solid #ccc 1px;
+    background-color: white;
+    overflow: hidden;
+    position:absolute;
+}
+
+.detailTopDiv {
+    padding:1px 3px 2px 3px;
+}
+
+.detailDivButton {
+    width:100%;
+    height:30px;
+    white-space:nowrap;
+    line-height:28px;
+    text-indent:0px;
+    margin: 3px 3px 3px 3px;
+}
+
+/*子表样式*/
+.subdiv {
+    height:auto;
+    overflow: auto;
+    position:relative;
+}
+
+.tableAutoWidth {
+    width:100%;
+    white-space:nowrap;
+    table-layout: inherit;
+}
+
+.tablefixed {
+    table-layout:fixed;
+}
+
+.tableTdTable189 {
+    width:100%;
+    height: 189px;
+    margin: 0px;
+    table-layout:fixed;
+}
+
+.tableTdTable {
+    width: 100%;
+    height: auto;
+    margin: 0px;
+    table-layout:fixed;
+}
+
+.tableTdTable413 {
+    width:100%;
+    height: 413px;
+    margin: 0px;
+    table-layout:fixed;
+}
+
+body {
+    margin: 0px;
+}
+
+html {
+    overflow-y: auto;
+}
+
+.divTd {
+    width:50%;
+    padding: 3px 3px 3px 3px;
+    vertical-align:top;
+    border-top: 0px;
+}
+
+.tableTd210 {
+    height:auto;
+    width:50%;
+    padding: 3px 3px 3px 3px;
+    vertical-align:top;
+}
+
+.tableOverflow189 {
+    height: 189px;
+    overflow-y:scroll;
+}
+
+.tableOverflow413 {
+    height: 413px;
+    overflow-y:scroll;
+}
+
+.hiddenElement {
+    display:none;
+}
+
+.copyToTextarea {
+    width:384px;
+    height:150px;
+}
+
+.poptopdiv {
+    padding:0px; 
+}
+
+.popbottomdiv {
+    bottom:0; 
+    left:0;
+    padding:0px;
+    position:relative;
+    display:flex;
+    width: 100%;
+}
+
+.divbutton {
+    width:100%;
+    height:30px;
+    white-space:nowrap;
+    line-height:28px;
+    text-indent:0px;
+}
+
+.divbuttonRight {
+    margin: 0px 3px 0px 0px;
+}
+
+.divbuttonLeft {
+    margin: 0px 0px 0px 3px;
+}
+
+.query_hint {
+    border: 5px solid #939393;
+    width: 20%;
+    height: 55px;
+    line-height: 55px;
+    padding: 0px 0px;
+    position: absolute;
+    left: 40%;
+    top: 45%;
+    font-size: 15px;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    z-index:1003;
+    background-color: #f9f9f9;
+}
+
+.query_hint img {
+    position: relative;
+    top: 10px;
+    left: -8px;
+}

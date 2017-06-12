@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+     http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd">
+
+
+	<!-- mockCore -->
+	<bean id="mockDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${mysql.driverClassName}" />
+		<property name="url" value="${mysql.url}" />
+		<property name="username" value="${mysql.user}" />
+		<property name="password" value="${mysql.password}" />
+		<property name="initialSize" value="${mysql.initialSize}" />
+		<property name="minIdle" value="${mysql.minIdle}" />
+		<property name="maxIdle" value="${mysql.maxIdle}" />
+		<property name="maxTotal" value="${mysql.maxTotal}" />
+		<property name="maxWaitMillis" value="${mysql.maxWaitMillis}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${mysql.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${mysql.minEvictableIdleTimeMillis}" />
+		<property name="testWhileIdle" value="${mysql.testWhileIdle}" />
+		<property name="testOnBorrow" value="${mysql.testOnBorrow}" />
+		<property name="testOnReturn" value="${mysql.testOnReturn}" />
+		<property name="removeAbandonedOnMaintenance" value="${mysql.removeAbandonedOnMaintenance}" />
+		<property name="removeAbandonedOnBorrow" value="${mysql.removeAbandonedOnBorrow}" />
+		<property name="removeAbandonedTimeout" value="${mysql.removeAbandonedTimeout}" />
+		<property name="logAbandoned" value="${mysql.logAbandoned}" />
+		<property name="validationQuery" value="select 1 from dual" />
+	</bean>
+
+	<bean id="mockFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="mockDataSource" />
+		<property name="configLocation"
+			value="classpath:mybatis/mybatis-mock-configuration.xml" />
+		<property name="typeAliasesPackage" value="com.tony.test.mock.po" />
+	</bean>
+
+	<bean id="mockAutoMapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.tony.test.mock.auto.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="mockFactory" />
+	</bean>
+
+	<bean id="mockDefineMapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.tony.test.mock.define.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="mockFactory" />
+	</bean>
+
+</beans>

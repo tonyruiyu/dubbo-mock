@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.tony.test.mock.define.mapper.MockServiceDefineMapper">
+	<select id="selectMockServiceDefine" resultType="com.tony.test.mock.po.MockServiceDefine">
+		SELECT
+		ms.*,pc.protocol_Name,pc.protocol_port,rc.registry_protocol,rc.registry_address
+		FROM mock_service ms,protocol_config pc,registry_config rc
+		WHERE
+		ms.protocol_id = pc.id AND ms.registry_id = rc.id
+		<if test="mockServiceDefine.registryProtocol != null">
+			and rc.registry_protocol =
+			#{mockServiceDefine.registryProtocol}
+		</if>
+
+		<if test="mockServiceDefine.registryAddress != null">
+			and rc.registry_address =
+			#{mockServiceDefine.registryAddress}
+		</if>
+
+		<if test="mockServiceDefine.protocolPort != null">
+			and rc.protocol_port = #{mockServiceDefine.protocolPort}
+		</if>
+
+		<if test="mockServiceDefine.protocolName != null">
+			and pc.protocol_Name =
+			#{mockServiceDefine.protocolName}
+		</if>
+
+		<if test="mockServiceDefine.id != null">
+			and ms.id = #{mockServiceDefine.id}
+		</if>
+		<if test="mockServiceDefine.serviceStatus != null">
+			and ms.service_status = #{mockServiceDefine.serviceStatus}
+		</if>
+		<if test="mockServiceDefine.applicationName != null">
+			and ms.application_name =
+			#{mockServiceDefine.applicationName}
+		</if>
+		<if test="mockServiceDefine.serviceInterface != null">
+			and ms.service_interface =
+			#{mockServiceDefine.serviceInterface}
+		</if>
+		<if test="mockServiceDefine.groupName != null">
+			and ms.group_name = #{mockServiceDefine.groupName}
+		</if>
+		<if test="mockServiceDefine.version != null">
+			and ms.version = #{mockServiceDefine.version}
+		</if>
+		<if test="mockServiceDefine.timeout != null">
+			and ms.timeout = #{mockServiceDefine.timeout}
+		</if>
+		<if test="mockServiceDefine.retries != null">
+			and ms.retries = #{mockServiceDefine.retries}
+		</if>
+	</select>
+
+
+	<select id="selectMockRoleNames" resultType="string">
+		SELECT DISTINCT
+		smr.method_name FROM service_methed_rule smr,mock_service ms WHERE
+		smr.service_id = ms.id AND ms.id = ${id}
+	</select>
+
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.tony.mock</groupId>
+		<artifactId>dubbo_mock</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>mock_web</artifactId>
+	<packaging>war</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.tony.mock</groupId>
+			<artifactId>mock_service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.tony.mock</groupId>
+			<artifactId>protocol_dubbo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>mock_web</finalName>
+		<plugins>
+			<plugin>
+				<groupId>cn.tony</groupId>
+				<artifactId>tools-maven-plugin</artifactId>
+				<version>0.0.3</version>
+				<configuration>
+					<server-host>10.100.22.16</server-host>
+					<password>1234qwer</password>
+					<tomcatHome>/opt/tomcat-mock</tomcatHome>
+					<finalName>mock_web</finalName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

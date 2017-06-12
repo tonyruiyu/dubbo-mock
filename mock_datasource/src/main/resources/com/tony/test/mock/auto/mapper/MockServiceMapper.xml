@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tony.test.mock.auto.mapper.MockServiceMapper">
+  <resultMap id="BaseResultMap" type="com.tony.test.mock.po.MockService">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="service_interface" jdbcType="VARCHAR" property="serviceInterface" />
+    <result column="registry_id" jdbcType="INTEGER" property="registryId" />
+    <result column="protocol_id" jdbcType="INTEGER" property="protocolId" />
+    <result column="application_name" jdbcType="VARCHAR" property="applicationName" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="service_status" jdbcType="VARCHAR" property="serviceStatus" />
+    <result column="timeout" jdbcType="INTEGER" property="timeout" />
+    <result column="retries" jdbcType="INTEGER" property="retries" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, service_interface, registry_id, protocol_id, application_name, group_name, version, 
+    service_status, timeout, retries, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.tony.test.mock.po.MockServiceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mock_service
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mock_service
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mock_service
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tony.test.mock.po.MockServiceExample">
+    delete from mock_service
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tony.test.mock.po.MockService">
+    insert into mock_service (id, service_interface, registry_id, 
+      protocol_id, application_name, group_name, 
+      version, service_status, timeout, 
+      retries, update_time)
+    values (#{id,jdbcType=INTEGER}, #{serviceInterface,jdbcType=VARCHAR}, #{registryId,jdbcType=INTEGER}, 
+      #{protocolId,jdbcType=INTEGER}, #{applicationName,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{serviceStatus,jdbcType=VARCHAR}, #{timeout,jdbcType=INTEGER}, 
+      #{retries,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tony.test.mock.po.MockService">
+    insert into mock_service
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="serviceInterface != null">
+        service_interface,
+      </if>
+      <if test="registryId != null">
+        registry_id,
+      </if>
+      <if test="protocolId != null">
+        protocol_id,
+      </if>
+      <if test="applicationName != null">
+        application_name,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="serviceStatus != null">
+        service_status,
+      </if>
+      <if test="timeout != null">
+        timeout,
+      </if>
+      <if test="retries != null">
+        retries,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="serviceInterface != null">
+        #{serviceInterface,jdbcType=VARCHAR},
+      </if>
+      <if test="registryId != null">
+        #{registryId,jdbcType=INTEGER},
+      </if>
+      <if test="protocolId != null">
+        #{protocolId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationName != null">
+        #{applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceStatus != null">
+        #{serviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="timeout != null">
+        #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="retries != null">
+        #{retries,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tony.test.mock.po.MockServiceExample" resultType="java.lang.Integer">
+    select count(*) from mock_service
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mock_service
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceInterface != null">
+        service_interface = #{record.serviceInterface,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registryId != null">
+        registry_id = #{record.registryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.protocolId != null">
+        protocol_id = #{record.protocolId,jdbcType=INTEGER},
+      </if>
+      <if test="record.applicationName != null">
+        application_name = #{record.applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupName != null">
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceStatus != null">
+        service_status = #{record.serviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeout != null">
+        timeout = #{record.timeout,jdbcType=INTEGER},
+      </if>
+      <if test="record.retries != null">
+        retries = #{record.retries,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mock_service
+    set id = #{record.id,jdbcType=INTEGER},
+      service_interface = #{record.serviceInterface,jdbcType=VARCHAR},
+      registry_id = #{record.registryId,jdbcType=INTEGER},
+      protocol_id = #{record.protocolId,jdbcType=INTEGER},
+      application_name = #{record.applicationName,jdbcType=VARCHAR},
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      service_status = #{record.serviceStatus,jdbcType=VARCHAR},
+      timeout = #{record.timeout,jdbcType=INTEGER},
+      retries = #{record.retries,jdbcType=INTEGER},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tony.test.mock.po.MockService">
+    update mock_service
+    <set>
+      <if test="serviceInterface != null">
+        service_interface = #{serviceInterface,jdbcType=VARCHAR},
+      </if>
+      <if test="registryId != null">
+        registry_id = #{registryId,jdbcType=INTEGER},
+      </if>
+      <if test="protocolId != null">
+        protocol_id = #{protocolId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationName != null">
+        application_name = #{applicationName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceStatus != null">
+        service_status = #{serviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="timeout != null">
+        timeout = #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="retries != null">
+        retries = #{retries,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tony.test.mock.po.MockService">
+    update mock_service
+    set service_interface = #{serviceInterface,jdbcType=VARCHAR},
+      registry_id = #{registryId,jdbcType=INTEGER},
+      protocol_id = #{protocolId,jdbcType=INTEGER},
+      application_name = #{applicationName,jdbcType=VARCHAR},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      service_status = #{serviceStatus,jdbcType=VARCHAR},
+      timeout = #{timeout,jdbcType=INTEGER},
+      retries = #{retries,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
