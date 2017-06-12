@@ -331,7 +331,7 @@ public class DubboMockServiceTest extends TestBase {
 
     private void checkAndStartServer() {
         if (!dubboMockServer.isexport(serviceId)) {
-            dubboMockServer.startService(1);
+            dubboMockServer.startService(serviceId);
         }
     }
 }
