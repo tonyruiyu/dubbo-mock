@@ -78,7 +78,7 @@ import com.tony.test.mock.po.ServiceMethedRuleExample;
         if (!dubboServices.containsKey(serviceId)) {
             return false;
         }
-        return dubboServices.get(serviceId).isExported();
+        return !dubboServices.get(serviceId).isUnexported();
     }
 
     /**
