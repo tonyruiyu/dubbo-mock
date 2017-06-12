@@ -1,19 +1,19 @@
 /*
- Navicat MySQL Data Transfer
+Navicat MySQL Data Transfer
 
- Source Database       : mock_server
+Source Database       : mock_server
 
- Target Server Version : 50505
- File Encoding         : utf-8
+Target Server Type    : MYSQL
+Target Server Version : 50505
+File Encoding         : 65001
 
- Date: 11/07/2016 13:46:36 PM
+Date: 2017-06-12 17:22:18
 */
 
-SET NAMES utf8;
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
---  Table structure for `mock_service`
+-- Table structure for mock_service
 -- ----------------------------
 DROP TABLE IF EXISTS `mock_service`;
 CREATE TABLE `mock_service` (
@@ -29,23 +29,23 @@ CREATE TABLE `mock_service` (
   `retries` int(11) NOT NULL,
   `update_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `mock_test_param`
+-- Table structure for mock_test_param
 -- ----------------------------
 DROP TABLE IF EXISTS `mock_test_param`;
 CREATE TABLE `mock_test_param` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `par_key` varchar(200) NOT NULL,
   `par_value` text NOT NULL,
   `par_type` varchar(100) DEFAULT NULL,
   `subject_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `mock_test_subject`
+-- Table structure for mock_test_subject
 -- ----------------------------
 DROP TABLE IF EXISTS `mock_test_subject`;
 CREATE TABLE `mock_test_subject` (
@@ -55,10 +55,10 @@ CREATE TABLE `mock_test_subject` (
   `method` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_service_id` (`serviceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `protocol_config`
+-- Table structure for protocol_config
 -- ----------------------------
 DROP TABLE IF EXISTS `protocol_config`;
 CREATE TABLE `protocol_config` (
@@ -70,7 +70,7 @@ CREATE TABLE `protocol_config` (
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `registry_config`
+-- Table structure for registry_config
 -- ----------------------------
 DROP TABLE IF EXISTS `registry_config`;
 CREATE TABLE `registry_config` (
@@ -80,10 +80,10 @@ CREATE TABLE `registry_config` (
   `registry_timeout` int(11) NOT NULL,
   `update_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `service_methed_rule`
+-- Table structure for service_methed_rule
 -- ----------------------------
 DROP TABLE IF EXISTS `service_methed_rule`;
 CREATE TABLE `service_methed_rule` (
@@ -95,6 +95,4 @@ CREATE TABLE `service_methed_rule` (
   `update_time` datetime NOT NULL,
   `exec_sort` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8;
-
-SET FOREIGN_KEY_CHECKS = 1;
+) ENGINE=InnoDB AUTO_INCREMENT=175 DEFAULT CHARSET=utf8;
