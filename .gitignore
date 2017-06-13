@@ -26,3 +26,5 @@ target
 .settings*
 .git/*
 .git*
+.classpath
+
