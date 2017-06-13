@@ -1,6 +1,23 @@
 
 # DUBBO MOCK SERVER 使用说明
 
+## 安装数据库
+
+在数据库中执行sql`dubbo_mock/sql/mock_server.sql`
+
+更新mock_web模块resources中`mysql-connection.properties`
+```
+mysql.url=jdbc:mysql://127.0.0.1:3306/mock_server
+mysql.user=ry
+mysql.password=123456
+```
+
+## 发布文件
+执行mvn命令
+```
+mvn package -DskipTests=true
+```
+发布mock_server.war
 
 ## 配置注册中心
 协议|地址|超时时间(毫秒)
