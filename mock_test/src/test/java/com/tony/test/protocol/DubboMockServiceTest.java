@@ -53,6 +53,9 @@ public class DubboMockServiceTest extends TestBase {
     Class<TestAbcService>   interfaceClass = TestAbcService.class;
 
     List<ServiceMethedRule> smritmes       = Lists.newArrayList();
+    
+    String registryAddress = "10.100.22.8:2181";
+
 
     @Before
     public void init() {
@@ -306,7 +309,7 @@ public class DubboMockServiceTest extends TestBase {
     private void mockRegistryConfig() {
         registryConfigMapper = mock(RegistryConfigMapper.class);
         registryConfig.setId(serviceId);
-        registryConfig.setRegistryAddress("10.100.22.8:2181");
+		registryConfig.setRegistryAddress(registryAddress);
         registryConfig.setRegistryProtocol("zookeeper");
         registryConfig.setRegistryTimeout(50000);
         when(registryConfigMapper.selectByPrimaryKey(serviceId)).thenReturn(registryConfig);
