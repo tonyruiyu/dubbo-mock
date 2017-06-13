@@ -17,7 +17,7 @@ mysql.password=123456
 ```
 mvn package -DskipTests=true
 ```
-发布mock_server.war
+发布mock_web.war
 
 ## 配置注册中心
 协议|地址|超时时间(毫秒)
