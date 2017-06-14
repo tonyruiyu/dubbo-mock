@@ -64,3 +64,14 @@ Version|1.0
 ```
 {'message':'messagezry','par':[{'name':'zxc','age':11, class:'com.tony.test.protocol.Par'}]}
 ```
+
+
+## 配置说明
+### 服务清单
+![服务清单](http://github.com/tonyruiyu/tony-res-pic/raw/master/pic/dubbo_mock.png)
+
+### 服务详情
+![服务详情](http://github.com/tonyruiyu/tony-res-pic/raw/master/pic/mock_service.png)
+
+
+
