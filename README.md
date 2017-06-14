@@ -68,7 +68,7 @@ Version|1.0
 
 ## 配置说明
 ### 服务清单
-![服务清单](http://github.com/tonyruiyu/tony-res-pic/raw/master/pic/dubbo_mock.png)
+![服务清单](http://i4.piimg.com/597491/7fa077907536622f.png)
 
 ### 服务详情
 ![服务详情](http://github.com/tonyruiyu/tony-res-pic/raw/master/pic/mock_service.png)
