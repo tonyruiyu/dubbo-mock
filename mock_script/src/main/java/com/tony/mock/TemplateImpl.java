@@ -12,8 +12,6 @@ import org.apache.commons.lang.StringUtils;
 /**
  * 使用groovy模板引擎创建模板
  * 
- * @author zhangruiyu zhangry@metersbonwe.com
- * @date 2016年8月26日 上午1:46:01
  * @since V1.0
  * @version V1.0
  */

@@ -8,7 +8,6 @@ import java.util.Date;
 /**
  * 日期帮助工具
  * 
- * @author wangyudong
  * @version
  * @see
  * @since

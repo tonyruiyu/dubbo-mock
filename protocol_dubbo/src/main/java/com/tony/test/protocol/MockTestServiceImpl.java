@@ -14,8 +14,6 @@ import com.tony.mock.Template;
 /**
  * 脚本测试
  * 
- * @author zhangruiyu zhangry@metersbonwe.com
- * @date 2016年10月27日 下午2:38:55
  * @since V1.0
  * @version V1.0
  */

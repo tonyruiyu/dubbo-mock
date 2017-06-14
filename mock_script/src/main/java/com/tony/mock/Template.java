@@ -5,8 +5,6 @@ import java.util.Map;
 /**
  * 消息模板接口
  * 
- * @author zhangruiyu zhangry@metersbonwe.com
- * @date 2016年8月26日 上午1:45:27
  * @since V1.0
  * @version V1.0
  */
