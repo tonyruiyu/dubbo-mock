@@ -64,3 +64,33 @@ Version|1.0
 ```
 {'message':'messagezry','par':[{'name':'zxc','age':11, class:'com.tony.test.protocol.Par'}]}
 ```
+
+
+## 配置图解
+### 服务清单
+![服务清单](http://i4.piimg.com/597491/7fa077907536622f.png)
+
+### 服务详情
+![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/mock_service.png)
+
+### 添加注册中心
+![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/add_reg.png)
+
+### 添加协议
+![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/add_proto.png)
+
+### 添加方法mock规则
+![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/add_method_rule.png)
+
+### 选择规则进行测试
+![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/mock_test.png)
+
+### 测试详情
+![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/mock_test_info.png)
+
+### 测试保存测试数据
+![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/save_mock_test.png)
+
+
+
+
