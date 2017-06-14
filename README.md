@@ -66,12 +66,18 @@ Version|1.0
 ```
 
 
-## 配置说明
+## 配置图解
 ### 服务清单
 ![服务清单](http://i4.piimg.com/597491/7fa077907536622f.png)
 
 ### 服务详情
 ![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/mock_service.png)
+
+### 添加注册中心
+![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/add_reg.png)
+
+### 添加协议
+![服务详情](https://raw.githubusercontent.com/tonyruiyu/tony-res-pic/master/pic/add_proto.png)
 
 
 
