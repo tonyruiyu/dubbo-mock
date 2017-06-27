@@ -38,30 +38,22 @@ import com.tony.test.service.MockServiceService;
             return 0;
         }
         int count = 0;
-        try {
-            count = mockServiceMapper.updateByPrimaryKeySelective(mockService);
-            mockService.setUpdateTime(new Date());
-            if (count > 0) {
-                if ("running".equals(mockService.getServiceStatus())) {
-                    mockServer.startService(mockService.getId());
-                } else if ("stop".equals(mockService.getServiceStatus())) {
-                    mockServer.stopService(mockService.getId());
-                }
-            } else {
-                count = mockServiceMapper.insert(mockService);
-                List<MockService> services = selectMockService(mockService);
-                int id = 0;
-                if (CollectionUtils.isNotEmpty(services)) {
-                    for (MockService service : services) {
-                        if (service.getId() > id) {
-                            id = service.getId();
-                        }
-                    }
-                }
-                mockService.setId(id);
+        mockService.setUpdateTime(new Date());
+        if (mockService.getId()!= null) {
+            if ("running".equals(mockService.getServiceStatus())) {
+                mockServer.startService(mockService.getId());
+            } else if ("stop".equals(mockService.getServiceStatus())) {
+                mockServer.stopService(mockService.getId());
             }
-        } catch (Exception e) {
-            return count;
+            count = mockServiceMapper.updateByPrimaryKeySelective(mockService);
+        } else {
+            count = mockServiceMapper.insert(mockService);
+            List<MockService> services = selectMockService(mockService);
+            if (CollectionUtils.isNotEmpty(services)) {
+                for (MockService service : services) {
+                    mockService.setId(service.getId());
+                }
+            }
         }
         return count;
     }

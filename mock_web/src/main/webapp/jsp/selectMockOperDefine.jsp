@@ -51,7 +51,7 @@
                 });
                 $("#query_hint").addClass("hiddenElement");
             },
-            error : function(data) {
+            error : function() {
                 showErrorInfo(element,"出错啦！");
             }
         }
@@ -270,7 +270,7 @@
                 
                 showDivTable(table);
             },
-            error : function(data) {
+            error : function() {
                 showErrorInfo(table,"出错啦！");
             }
         }
@@ -433,7 +433,7 @@
                 form.submit();
 
             },
-            error : function(data) {
+            error : function() {
                 showErrorInfo(element,"出错啦！");
             }
         }
@@ -510,7 +510,7 @@
                 }
                 
             },
-            error : function(data) {
+            error : function() {
                 showErrorInfo(element,"出错啦！");
             }
         }
@@ -579,7 +579,7 @@
                     $("#mockTestResult").append("<div class='mockTestMethodRuleDiv'>" + data.context + "</div>");
                 }
             },
-            error : function(data) {
+            error : function() {
                 showErrorInfo(null,"出错啦！");
             }
         }
@@ -675,7 +675,7 @@
 /*                 $("#mockTestInfoInput").val(""); */
                 $("#mockTestInfoSelect").val("");
             },
-            error : function(data) {
+            error : function() {
                 showErrorInfo(element,"出错啦！");
             }
         }
@@ -721,7 +721,7 @@
             success : function(data) {
                 selectMockTestInfos();
             },
-            error : function(data) {
+            error : function() {
                 showErrorInfo(element,"出错啦！");
             }
         }
