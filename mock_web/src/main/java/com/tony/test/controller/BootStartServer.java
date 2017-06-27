@@ -17,54 +17,65 @@ import org.sqlite.util.StringUtils;
 
 import com.tony.test.protocol.MockServer;
 
-@Lazy(false) @Service public class BootStartServer implements InitializingBean, DisposableBean {
+@Lazy(false)
+@Service
+public class BootStartServer implements InitializingBean, DisposableBean {
 
-    @Resource(name = "dubboMockServer") MockServer server;
+	@Resource(name = "dubboMockServer")
+	MockServer server;
 
-    AtomicBoolean                                  isStarted = new AtomicBoolean(false);
+	AtomicBoolean isStarted = new AtomicBoolean(false);
 
-    @Resource  BasicDataSource mockDataSource;
-    
-    public void start() {
-        if (!isStarted.get()) {
-            server.start();
-            isStarted.set(true);
-        }
-    }
+	@Resource
+	BasicDataSource mockDataSource;
 
-    public void stop() {
-        if (isStarted.get()) {
-            server.stop();
-            isStarted.set(false);
-        }
-    }
-
-    public boolean isRunning() {
-        return isStarted.get();
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-     	Connection conn =  mockDataSource.getConnection();
-    	Statement stmt =  conn.createStatement() ;
-    	
-    	List<String> aa = IOUtils.readLines(getClass().getClassLoader().getResourceAsStream("sqlite.sql"));
-    	String s = StringUtils.join(aa,"\r\n");
-    	String[] sqls  = s.split(";");
-    	
-    	for (int i = 0; i < sqls.length; i++) {
-			String sql = sqls[i];
-			System.out.println("初始化sql : " + sql);
-	    	stmt.execute(sql);
+	public void start() {
+		if (!isStarted.get()) {
+			server.start();
+			isStarted.set(true);
 		}
-    	stmt.close();
-    	conn.close();
-        start();
-    }
+	}
 
-    @Override
-    public void destroy() throws Exception {
-        stop();
-    }
+	public void stop() {
+		if (isStarted.get()) {
+			server.stop();
+			isStarted.set(false);
+		}
+	}
+
+	public boolean isRunning() {
+		return isStarted.get();
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		initSql();
+		start();
+	}
+
+	private void initSql() {
+		try {
+			Connection conn = mockDataSource.getConnection();
+			Statement stmt = conn.createStatement();
+
+			List<String> aa = IOUtils.readLines(getClass().getClassLoader().getResourceAsStream("sqlite.sql"));
+			String s = StringUtils.join(aa, "\r\n");
+			String[] sqls = s.split(";");
+
+			for (int i = 0; i < sqls.length; i++) {
+				String sql = sqls[i];
+				System.out.println("初始化sql : " + sql);
+				stmt.execute(sql);
+			}
+			stmt.close();
+			conn.close();
+		} catch (Exception e) {
+		}
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		stop();
+	}
 
 }
