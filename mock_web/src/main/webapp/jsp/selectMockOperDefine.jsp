@@ -33,18 +33,6 @@
         return {
             type : "post",
             success : function(data) {
-                var serviceStatus = data.serviceStatus;
-                if (serviceStatus == "running") {
-                    $("#serviceStatus").find("input").addClass("running");
-                    $("#serviceStatus").find("input").removeClass("stop");
-                    $("#running").addClass("hiddenElement");
-                    $("#stop").removeClass("hiddenElement");
-                } else {
-                    $("#serviceStatus").find("input").addClass("stop");
-                    $("#serviceStatus").find("input").removeClass("running");
-                    $("#stop").addClass("hiddenElement");
-                    $("#running").removeClass("hiddenElement");
-                }
                 element.disabled = false;
                 $("#jquery_bg").css({
                     display : "none"
@@ -57,9 +45,12 @@
         }
     }
 
-    function runningOrStopService(serviceStatus, element) {
-        
-        $("#serviceStatus").find("input")[0].value = element.innerText;
+    function runningOrStopService(element) {
+        if ($(element).is(':checked')) {
+			$("#serviceStatus").find("input")[0].value = "running";
+        } else {
+			$("#serviceStatus").find("input")[0].value = "stop";
+        }
         element.disabled = true;
         var height = $(document).height();
         $("#jquery_bg").css({
@@ -747,6 +738,12 @@
     }
 
     $(document).ready(function() {
+
+        if("${mockOperDefine.mockServices[0].serviceStatus}" == "running") {
+            $("#onoffswitch").attr("checked","checked");
+        } else {
+            $("#onoffswitch").attr("");
+        }
         
         var w1, w2, outer, inner;
         outer = document.createElement('div');
@@ -840,7 +837,7 @@
                 <th>Version</th>
                 <th>超时时间(毫秒)</th>
                 <th>重试次数</th>
-                <th colspan="2">服务状态</th>
+                <th>服务状态</th>
                 <th style="width: 69px;">操作</th>
             </tr>
         </thead>
@@ -859,12 +856,15 @@
                         <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="version" value="${mockServices.version }" /></td>
                         <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="timeout" value="${mockServices.timeout }" /></td>
                         <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="retries" value="${mockServices.retries }" /></td>
-                        <td id="serviceStatus" class="serviceStatusTd"><input class="${mockServices.serviceStatus} serviceStatusInput" type="text" name="serviceStatus" readonly="readonly" value="${mockServices.serviceStatus}" /></td>
-                        <td class="serviceStatusTd">
-                            <button onclick='runningOrStopService("running",this)' ondblclick='if(document.all)event.cancelBubble=true;else event.stopPropagation();' class="serviceStatusButton runningButton <c:if test='${mockServices.serviceStatus == "running"}'>hiddenElement</c:if>"
-                            type="button" id="running" value="${mockServices.id}" <c:if test='${mockServices.id == null}'>disabled='disabled'</c:if>>running</button>
-                            <button onclick='runningOrStopService("stop",this)' ondblclick='if(document.all)event.cancelBubble=true;else event.stopPropagation();'
-                            class="serviceStatusButton stopButton <c:if test='${mockServices.serviceStatus == null || mockServices.serviceStatus == "stop"}'>hiddenElement</c:if>" type="button" id="stop" value="${mockServices.id}" <c:if test='${mockServices.id == null}'>disabled='disabled'</c:if>>stop</button>
+                        <td id="serviceStatus" class="serviceStatusTd">
+                            <input style="display: none" type="text" name="serviceStatus" readonly="readonly" value="${mockServices.serviceStatus}" />
+                            <div class="buttonswitch">
+                                <input class="buttonswitch-checkbox" id="onoffswitch" name="serviceStatus" type="checkbox" onclick='runningOrStopService(this)'>
+                                <label class="buttonswitch-label" for="onoffswitch">
+                                    <span class="buttonswitch-inner" data-on="running" data-off="stop"></span>  
+                                    <span class="buttonswitch-switch"></span>  
+                                </label>
+                            </div>
                         </td>
                         <td class="buttonTd">
                             <button class="updateButton mockServicesButton" type="button" onclick='updateOneRow(this,"mockServicesForm")' value="${mockServices.id}">${mockServices.id == null ? "新增" : "修改"}</button>
