@@ -8,6 +8,7 @@ import com.tony.test.ReflectUtil;
 import com.tony.test.mock.po.MockService;
 
 public class Test {
+    @SuppressWarnings({ "resource", "unused" })
     public static void main(String[] args) throws IOException {
         MockService mockService = new MockService();
         mockService.setId(1);
