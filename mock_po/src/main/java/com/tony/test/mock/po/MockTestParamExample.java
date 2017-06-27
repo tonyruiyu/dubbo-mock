@@ -4,10 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MockTestParamExample {
+    /**
+     * mock_test_param
+     */
     protected String orderByClause;
 
+    /**
+     * mock_test_param
+     */
     protected boolean distinct;
 
+    /**
+     * mock_test_param
+     */
     protected List<Criteria> oredCriteria;
 
     public MockTestParamExample() {
@@ -63,6 +72,9 @@ public class MockTestParamExample {
         distinct = false;
     }
 
+    /**
+     * mock_test_param null
+     */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -234,6 +246,76 @@ public class MockTestParamExample {
             return (Criteria) this;
         }
 
+        public Criteria andParValueIsNull() {
+            addCriterion("par_value is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueIsNotNull() {
+            addCriterion("par_value is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueEqualTo(String value) {
+            addCriterion("par_value =", value, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueNotEqualTo(String value) {
+            addCriterion("par_value <>", value, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueGreaterThan(String value) {
+            addCriterion("par_value >", value, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueGreaterThanOrEqualTo(String value) {
+            addCriterion("par_value >=", value, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueLessThan(String value) {
+            addCriterion("par_value <", value, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueLessThanOrEqualTo(String value) {
+            addCriterion("par_value <=", value, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueLike(String value) {
+            addCriterion("par_value like", value, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueNotLike(String value) {
+            addCriterion("par_value not like", value, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueIn(List<String> values) {
+            addCriterion("par_value in", values, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueNotIn(List<String> values) {
+            addCriterion("par_value not in", values, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueBetween(String value1, String value2) {
+            addCriterion("par_value between", value1, value2, "parValue");
+            return (Criteria) this;
+        }
+
+        public Criteria andParValueNotBetween(String value1, String value2) {
+            addCriterion("par_value not between", value1, value2, "parValue");
+            return (Criteria) this;
+        }
+
         public Criteria andParTypeIsNull() {
             addCriterion("par_type is null");
             return (Criteria) this;
@@ -365,6 +447,9 @@ public class MockTestParamExample {
         }
     }
 
+    /**
+     * mock_test_param
+     */
     public static class Criteria extends GeneratedCriteria {
 
         protected Criteria() {
@@ -372,6 +457,9 @@ public class MockTestParamExample {
         }
     }
 
+    /**
+     * mock_test_param null
+     */
     public static class Criterion {
         private String condition;
 

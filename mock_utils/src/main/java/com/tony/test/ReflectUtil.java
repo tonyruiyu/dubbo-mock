@@ -250,6 +250,8 @@ import org.apache.commons.lang.StringUtils;
                     method = clazzCriteria.getDeclaredMethod(key, field.getType());
                     method.invoke(objectCreateCriteria, obj);
                 }
+                
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -5,10 +5,19 @@ import java.util.Date;
 import java.util.List;
 
 public class ServiceMethedRuleExample {
+    /**
+     * service_methed_rule
+     */
     protected String orderByClause;
 
+    /**
+     * service_methed_rule
+     */
     protected boolean distinct;
 
+    /**
+     * service_methed_rule
+     */
     protected List<Criteria> oredCriteria;
 
     public ServiceMethedRuleExample() {
@@ -64,6 +73,9 @@ public class ServiceMethedRuleExample {
         distinct = false;
     }
 
+    /**
+     * service_methed_rule null
+     */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -295,6 +307,146 @@ public class ServiceMethedRuleExample {
             return (Criteria) this;
         }
 
+        public Criteria andWhenScriptIsNull() {
+            addCriterion("when_script is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptIsNotNull() {
+            addCriterion("when_script is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptEqualTo(String value) {
+            addCriterion("when_script =", value, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptNotEqualTo(String value) {
+            addCriterion("when_script <>", value, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptGreaterThan(String value) {
+            addCriterion("when_script >", value, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptGreaterThanOrEqualTo(String value) {
+            addCriterion("when_script >=", value, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptLessThan(String value) {
+            addCriterion("when_script <", value, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptLessThanOrEqualTo(String value) {
+            addCriterion("when_script <=", value, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptLike(String value) {
+            addCriterion("when_script like", value, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptNotLike(String value) {
+            addCriterion("when_script not like", value, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptIn(List<String> values) {
+            addCriterion("when_script in", values, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptNotIn(List<String> values) {
+            addCriterion("when_script not in", values, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptBetween(String value1, String value2) {
+            addCriterion("when_script between", value1, value2, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andWhenScriptNotBetween(String value1, String value2) {
+            addCriterion("when_script not between", value1, value2, "whenScript");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageIsNull() {
+            addCriterion("return_message is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageIsNotNull() {
+            addCriterion("return_message is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageEqualTo(String value) {
+            addCriterion("return_message =", value, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageNotEqualTo(String value) {
+            addCriterion("return_message <>", value, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageGreaterThan(String value) {
+            addCriterion("return_message >", value, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageGreaterThanOrEqualTo(String value) {
+            addCriterion("return_message >=", value, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageLessThan(String value) {
+            addCriterion("return_message <", value, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageLessThanOrEqualTo(String value) {
+            addCriterion("return_message <=", value, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageLike(String value) {
+            addCriterion("return_message like", value, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageNotLike(String value) {
+            addCriterion("return_message not like", value, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageIn(List<String> values) {
+            addCriterion("return_message in", values, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageNotIn(List<String> values) {
+            addCriterion("return_message not in", values, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageBetween(String value1, String value2) {
+            addCriterion("return_message between", value1, value2, "returnMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andReturnMessageNotBetween(String value1, String value2) {
+            addCriterion("return_message not between", value1, value2, "returnMessage");
+            return (Criteria) this;
+        }
+
         public Criteria andUpdateTimeIsNull() {
             addCriterion("update_time is null");
             return (Criteria) this;
@@ -416,6 +568,9 @@ public class ServiceMethedRuleExample {
         }
     }
 
+    /**
+     * service_methed_rule
+     */
     public static class Criteria extends GeneratedCriteria {
 
         protected Criteria() {
@@ -423,6 +578,9 @@ public class ServiceMethedRuleExample {
         }
     }
 
+    /**
+     * service_methed_rule null
+     */
     public static class Criterion {
         private String condition;
 

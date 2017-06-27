@@ -5,12 +5,10 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="service_id" jdbcType="INTEGER" property="serviceId" />
     <result column="method_name" jdbcType="VARCHAR" property="methodName" />
+    <result column="when_script" jdbcType="VARCHAR" property="whenScript" />
+    <result column="return_message" jdbcType="VARCHAR" property="returnMessage" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="exec_sort" jdbcType="INTEGER" property="execSort" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.tony.test.mock.po.ServiceMethedRule">
-    <result column="when_script" jdbcType="LONGVARCHAR" property="whenScript" />
-    <result column="return_message" jdbcType="LONGVARCHAR" property="returnMessage" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,27 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, service_id, method_name, update_time, exec_sort
+    id, service_id, method_name, when_script, return_message, update_time, exec_sort
   </sql>
-  <sql id="Blob_Column_List">
-    when_script, return_message
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.tony.test.mock.po.ServiceMethedRuleExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from service_methed_rule
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.tony.test.mock.po.ServiceMethedRuleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -106,11 +85,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from service_methed_rule
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -126,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.tony.test.mock.po.ServiceMethedRule">
     insert into service_methed_rule (id, service_id, method_name, 
-      update_time, exec_sort, when_script, 
-      return_message)
+      when_script, return_message, update_time, 
+      exec_sort)
     values (#{id,jdbcType=INTEGER}, #{serviceId,jdbcType=INTEGER}, #{methodName,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{execSort,jdbcType=INTEGER}, #{whenScript,jdbcType=LONGVARCHAR}, 
-      #{returnMessage,jdbcType=LONGVARCHAR})
+      #{whenScript,jdbcType=VARCHAR}, #{returnMessage,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{execSort,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tony.test.mock.po.ServiceMethedRule">
     insert into service_methed_rule
@@ -144,17 +121,17 @@
       <if test="methodName != null">
         method_name,
       </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="execSort != null">
-        exec_sort,
-      </if>
       <if test="whenScript != null">
         when_script,
       </if>
       <if test="returnMessage != null">
         return_message,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="execSort != null">
+        exec_sort,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -167,21 +144,21 @@
       <if test="methodName != null">
         #{methodName,jdbcType=VARCHAR},
       </if>
+      <if test="whenScript != null">
+        #{whenScript,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMessage != null">
+        #{returnMessage,jdbcType=VARCHAR},
+      </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="execSort != null">
         #{execSort,jdbcType=INTEGER},
       </if>
-      <if test="whenScript != null">
-        #{whenScript,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="returnMessage != null">
-        #{returnMessage,jdbcType=LONGVARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.tony.test.mock.po.ServiceMethedRuleExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.tony.test.mock.po.ServiceMethedRuleExample" resultType="java.lang.Long">
     select count(*) from service_methed_rule
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -199,32 +176,19 @@
       <if test="record.methodName != null">
         method_name = #{record.methodName,jdbcType=VARCHAR},
       </if>
+      <if test="record.whenScript != null">
+        when_script = #{record.whenScript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnMessage != null">
+        return_message = #{record.returnMessage,jdbcType=VARCHAR},
+      </if>
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.execSort != null">
         exec_sort = #{record.execSort,jdbcType=INTEGER},
       </if>
-      <if test="record.whenScript != null">
-        when_script = #{record.whenScript,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.returnMessage != null">
-        return_message = #{record.returnMessage,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update service_methed_rule
-    set id = #{record.id,jdbcType=INTEGER},
-      service_id = #{record.serviceId,jdbcType=INTEGER},
-      method_name = #{record.methodName,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      exec_sort = #{record.execSort,jdbcType=INTEGER},
-      when_script = #{record.whenScript,jdbcType=LONGVARCHAR},
-      return_message = #{record.returnMessage,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -234,6 +198,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       service_id = #{record.serviceId,jdbcType=INTEGER},
       method_name = #{record.methodName,jdbcType=VARCHAR},
+      when_script = #{record.whenScript,jdbcType=VARCHAR},
+      return_message = #{record.returnMessage,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       exec_sort = #{record.execSort,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -249,35 +215,27 @@
       <if test="methodName != null">
         method_name = #{methodName,jdbcType=VARCHAR},
       </if>
+      <if test="whenScript != null">
+        when_script = #{whenScript,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMessage != null">
+        return_message = #{returnMessage,jdbcType=VARCHAR},
+      </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="execSort != null">
         exec_sort = #{execSort,jdbcType=INTEGER},
       </if>
-      <if test="whenScript != null">
-        when_script = #{whenScript,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="returnMessage != null">
-        return_message = #{returnMessage,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tony.test.mock.po.ServiceMethedRule">
-    update service_methed_rule
-    set service_id = #{serviceId,jdbcType=INTEGER},
-      method_name = #{methodName,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      exec_sort = #{execSort,jdbcType=INTEGER},
-      when_script = #{whenScript,jdbcType=LONGVARCHAR},
-      return_message = #{returnMessage,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tony.test.mock.po.ServiceMethedRule">
     update service_methed_rule
     set service_id = #{serviceId,jdbcType=INTEGER},
       method_name = #{methodName,jdbcType=VARCHAR},
+      when_script = #{whenScript,jdbcType=VARCHAR},
+      return_message = #{returnMessage,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       exec_sort = #{execSort,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

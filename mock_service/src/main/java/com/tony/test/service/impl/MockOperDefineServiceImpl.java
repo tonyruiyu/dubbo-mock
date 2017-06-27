@@ -40,7 +40,13 @@ import com.tony.test.service.ServiceMethedRuleService;
         List<RegistryConfig> registryConfigs = registryConfigServiceImpl.selectRegistryConfig(null);
         ServiceMethedRule rule = new ServiceMethedRule();
         rule.setServiceId(service.getId());
-        List<ServiceMethedRule> serviceMethedRules = serviceMethedRuleServiceImpl.selectServiceMethedRule(rule);
+        List<ServiceMethedRule> serviceMethedRules = null;
+		try {
+			serviceMethedRules = serviceMethedRuleServiceImpl.selectServiceMethedRule(rule);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         if (CollectionUtils.isEmpty(mockServices)) {
             mockServices = Lists.newArrayList();
             mockServices.add(new MockServiceDefine());
