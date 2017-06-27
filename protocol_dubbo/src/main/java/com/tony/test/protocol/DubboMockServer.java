@@ -126,7 +126,7 @@ import com.tony.test.mock.po.ServiceMethedRuleExample;
     private List<ServiceMethedRule> selectMethodRule(int serviceId, Integer[] ruleIds) {
         ServiceMethedRuleExample example = new ServiceMethedRuleExample();
         example.or().andServiceIdEqualTo(serviceId).andIdIn(Arrays.asList(ruleIds));
-        return serviceMethedRuleMapper.selectByExampleWithBLOBs(example);
+        return serviceMethedRuleMapper.selectByExample(example);
     }
 
     /**
@@ -168,7 +168,7 @@ import com.tony.test.mock.po.ServiceMethedRuleExample;
     private List<ServiceMethedRule> selectMethodRule(int serviceId) {
         ServiceMethedRuleExample example = new ServiceMethedRuleExample();
         example.or().andServiceIdEqualTo(serviceId);
-        return serviceMethedRuleMapper.selectByExampleWithBLOBs(example);
+        return serviceMethedRuleMapper.selectByExample(example);
     }
 
     private MockService selectMockService(int serviceId) {
