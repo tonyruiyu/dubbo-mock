@@ -6,7 +6,7 @@
 	<artifactId>dubbo_mock</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>dubbo_mock</name>
+	<name>dubbo-mock</name>
 	<description>dubbo_mock</description>
 	<modules>
 		<module>protocol_dubbo</module>
@@ -89,11 +89,11 @@
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson_version}</version>
 			</dependency>
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>1.9.2</version>
-		</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.9.2</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.alibaba</groupId>
@@ -216,6 +216,12 @@
 				<groupId>jstl</groupId>
 				<artifactId>jstl</artifactId>
 				<version>1.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.xerial</groupId>
+				<artifactId>sqlite-jdbc</artifactId>
+				<version>3.16.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
