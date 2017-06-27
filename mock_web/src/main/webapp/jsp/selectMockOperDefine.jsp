@@ -395,6 +395,7 @@
                     }
                     
                     tempTr.appendTo("#MethedTable");
+                    $("#MethedTable").find("tbody")[0].id = "serviceMethedRules";
                     
                 }
                 $("#bg").css({
