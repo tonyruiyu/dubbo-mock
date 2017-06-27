@@ -1,15 +1,14 @@
 
 # DUBBO MOCK SERVER 使用说明
 
-## 安装数据库
+DUBBO MOCK SERVER 是一个基于web的dubbo服务的mock平台，可以通过groovy脚本动态的配置mock规则
 
-在数据库中执行sql`dubbo_mock/sql/mock_server.sql`
 
-更新mock_web模块resources中`mysql-connection.properties`
+## 选择数据库数据库按照路径(如果有需要)
+
+更新mock_web模块resources中`db-connection.properties`
 ```
-mysql.url=jdbc:mysql://127.0.0.1:3306/mock_server
-mysql.user=ry
-mysql.password=123456
+mysql.url=jdbc:sqlite:sql.db
 ```
 
 ## 发布文件
