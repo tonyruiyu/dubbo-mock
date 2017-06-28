@@ -23,58 +23,58 @@
         document.getElementById("addMockServiceForm").submit();
     }
 
-    function runningOrStopServiceBack(id) {
+    
+    function runningOrStopServiceBack(element) {
         return {
             type : "post",
             success : function(data) {
-                var serviceStatus = data.serviceStatus;
-                if (serviceStatus == "running") {
-                    $("#serviceStatus" + id).find("input")[0].value = "running";
-                    $("#serviceStatus" + id).find("input").addClass("running");
-                    $("#serviceStatus" + id).find("input").removeClass("stop");
-                    $("#running" + id).attr("disabled", false);
-                    $("#running" + id).addClass("hiddenElement");
-                    $("#stop" + id).removeClass("hiddenElement");
-                } else {
-                    $("#serviceStatus" + id).find("input")[0].value = "stop";
-                    $("#serviceStatus" + id).find("input").addClass("stop");
-                    $("#serviceStatus" + id).find("input").removeClass(
-                            "running");
-                    $("#stop" + id).attr("disabled", false);
-                    $("#stop" + id).addClass("hiddenElement");
-                    $("#running" + id).removeClass("hiddenElement");
-                }
-
-                $("#jquery_bg").css({
-                    'display' : "none"
-                });
-                $("#query_hint").addClass("hiddenElement");
+                hiddenLoadingIcon(element);
             },
             error : function() {
-                $("#jquery_bg").css({
-                    'display' : "none"
-                });
-                $("#query_hint").addClass("hiddenElement");
-                alert("出错啦");
+                if ($(element).is(':checked')) {
+                    $(element).checked = false;
+                } else {
+                    $(element).checked = true;
+                }
+                showErrorInfo(element,"出错啦！");
             }
         }
     }
 
-    function runningOrStopService(serviceStatus, id) {
-
+    function runningOrStopService(element, id) {
+        var form = $("#runningOrStopServiceFrom" + id);
+        if ($(element).is(':checked')) {
+            form.find("input")[1].value = "running";
+        } else {
+            form.find("input")[1].value = "stop";
+        }
+        showLoadingIcon(element);
+        $("#runningOrStopServiceFrom" + id).ajaxSubmit(runningOrStopServiceBack(element));
+    }
+    
+    function showLoadingIcon(element) {
+        element.disabled = true;
         var height = $(document).height();
         $("#jquery_bg").css({
-            'display' : "block",
+            display : "block",
             'height' : height
         });
         $("#query_hint").removeClass("hiddenElement");
-
-        var form = $("#runningOrStopServiceFrom" + id);
-        var inputs = form.find("input");
-        inputs[1].value = serviceStatus;
-
-        $("#runningOrStopServiceFrom" + id).ajaxSubmit(
-                runningOrStopServiceBack(id));
+    }
+    
+    function hiddenLoadingIcon(element) {
+        element.disabled = false;
+        $("#jquery_bg").css({
+            display : "none"
+        });
+        $("#query_hint").addClass("hiddenElement");
+    }
+    
+    function showErrorInfo(element,errorMessage) {
+        if(element != null) {
+            hiddenLoadingIcon(element);
+        }
+        alert(errorMessage);
     }
 
     function selectMockOperDefine(formId, id) {
@@ -146,7 +146,7 @@
                 <th>超时时间</th>
                 <th>重试次数</th>
                 <th>更新时间</th>
-                <th colspan="2">服务状态</th>
+                <th>服务状态</th>
                 <th style="width: 69px;">操作</th>
             </tr>
         </thead>
@@ -166,15 +166,18 @@
                     <td><c:out value="${resultInfo.timeout }" /></td>
                     <td><c:out value="${resultInfo.retries }" /></td>
                     <td><c:out value="${dateUtil.date2String(resultInfo.updateTime,'yyyy-MM-dd HH:mm:ss')}" /></td>
-                    <td id="serviceStatus${resultInfo.id}" class="serviceStatusTd"><input class="${resultInfo.serviceStatus} serviceStatusInput" type="text" name="serviceStatus" readonly="readonly" value="${resultInfo.serviceStatus}" /></td>
-                    <td class="serviceStatusTd">
+                    <td id="serviceStatus" class="serviceStatusTd">
                         <form id='runningOrStopServiceFrom${resultInfo.id}' action='<c:url value="/mvc/updateOrInsertMockService"/>' method="post">
-                            <input type="hidden" name="id" value="${resultInfo.id}" /> <input type="hidden" name="serviceStatus" />
+                            <input type="hidden" name="id" value="${resultInfo.id}" /><input type="hidden" name="serviceStatus" />
                         </form>
-                        <button onclick='runningOrStopService("running","${resultInfo.id}")' ondblclick='if(document.all)event.cancelBubble=true;else event.stopPropagation();' class="serviceStatusButton runningButton <c:if test='${resultInfo.serviceStatus == "running"}'>hiddenElement</c:if>"
-                        type="button" name="${resultInfo.id}" id="running${resultInfo.id}" value="running">running</button>
-                        <button onclick='runningOrStopService("stop","${resultInfo.id}")' ondblclick='if(document.all)event.cancelBubble=true;else event.stopPropagation();'
-                        class="serviceStatusButton stopButton <c:if test='${resultInfo.serviceStatus == null || resultInfo.serviceStatus == "stop"}'>hiddenElement</c:if>" type="button" name="${resultInfo.id}" id="stop${resultInfo.id}" value="stop">stop</button>
+                        <div class="buttonswitch">
+                            <input class="buttonswitch-checkbox" id="onoffswitch${resultInfo.id}" type="checkbox" 
+                                <c:if test='${resultInfo.serviceStatus == "running"}'>checked</c:if> onclick='runningOrStopService(this,"${resultInfo.id}")'>
+                            <label class="buttonswitch-label" for="onoffswitch${resultInfo.id}">
+                                <span class="buttonswitch-inner" data-on="running" data-off="stop"></span>  
+                                <span class="buttonswitch-switch"></span>  
+                            </label>
+                        </div>
                     </td>
                     <td class="buttonTd">
                         <form id='deleteMockServiceFrom${resultInfo.id}' action='<c:url value="/mvc/deleteMockService"/>' method="post">

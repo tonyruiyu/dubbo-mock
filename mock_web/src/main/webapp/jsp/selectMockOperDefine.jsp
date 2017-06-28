@@ -28,21 +28,23 @@
         var content = target.value;
         target.value = formatJson(content);
     }
-
-    function runningOrStopServiceBack(element) {
-        return {
-            type : "post",
-            success : function(data) {
-                element.disabled = false;
-                $("#jquery_bg").css({
-                    display : "none"
-                });
-                $("#query_hint").addClass("hiddenElement");
-            },
-            error : function() {
-                showErrorInfo(element,"出错啦！");
-            }
-        }
+    
+    function showLoadingIcon(element) {
+        element.disabled = true;
+        var height = $(document).height();
+        $("#jquery_bg").css({
+            display : "block",
+            'height' : height
+        });
+        $("#query_hint").removeClass("hiddenElement");
+    }
+    
+    function hiddenLoadingIcon(element) {
+        element.disabled = false;
+        $("#jquery_bg").css({
+            display : "none"
+        });
+        $("#query_hint").addClass("hiddenElement");
     }
 
     function runningOrStopService(element) {
@@ -51,33 +53,42 @@
         } else {
 			$("#serviceStatus").find("input")[0].value = "stop";
         }
-        element.disabled = true;
-        var height = $(document).height();
-        $("#jquery_bg").css({
-            display : "block",
-            'height' : height
-        });
-        $("#query_hint").removeClass("hiddenElement");
+        
+        showLoadingIcon(element);
 
         var form = $("#mockServicesForm");
         form.ajaxSubmit(runningOrStopServiceBack(element));
+    }
+    
+    function runningOrStopServiceBack(element) {
+        return {
+            type : "post",
+            success : function(data) {
+                hiddenLoadingIcon(element);
+            },
+            error : function() {
+                if ($(element).is(':checked')) {
+                    $(element).checked = false;
+                } else {
+                    $(element).checked = true;
+                }
+                showErrorInfo(element,"出错啦！");
+            }
+        }
     }
 
     document.onkeydown = function(event) {
         var e = event || window.event || arguments.callee.caller.arguments[0];
         if (e && e.keyCode == 27) { // 按 Esc 
-            var popdivs = $(".popdiv");
-            for ( var index in popdivs) {
-                $("#" + popdivs[index].id).addClass("hiddenElement");
-            }
-            $("#detailDiv").addClass("hiddenElement");
-            $("#bg").css({
-                'display' : "none"
-            });
-
+            hiddenDivTable();
         }
     }
 
+    function showAddTable(table) {
+        $("#show" + table + "Button").attr("disabled", true);
+        $("#add" + table + "Table").removeClass("hiddenElement");
+    };
+    
     function hiddenDivTable() {
         var popdivs = $(".popdiv");
         for ( var index in popdivs) {
@@ -87,11 +98,6 @@
         $("#bg").css({
             'display' : "none"
         });
-    };
-
-    function showAddTable(table) {
-        $("#show" + table + "Button").attr("disabled", true);
-        $("#add" + table + "Table").removeClass("hiddenElement");
     };
 
     function addFormOptionsBack(table) {
@@ -243,7 +249,7 @@
         }
     }
 
-    function openMockTestTableBack(table) {
+    function openMockTestTableBack(element) {
         return {
             type : "post",
             success : function(data) {
@@ -259,10 +265,10 @@
 
                 changeMockTestMethodNameValue();
                 
-                showDivTable(table);
+                showDivTable(element);
             },
             error : function() {
-                showErrorInfo(table,"出错啦！");
+                showErrorInfo(element,"出错啦！");
             }
         }
     };
@@ -275,12 +281,8 @@
 
     function showErrorInfo(element,errorMessage) {
         if(element != null) {
-            element.disabled = false;
+            hiddenLoadingIcon(element);
         }
-        $("#jquery_bg").css({
-            'display': "none"
-        });
-        $("#query_hint").addClass("hiddenElement");
         alert(errorMessage);
     }
 
@@ -386,7 +388,9 @@
                     }
                     
                     tempTr.appendTo("#MethedTable");
-                    $("#MethedTable").find("tbody")[0].id = "serviceMethedRules";
+                    if($("#MethedTable").find("tbody")[0].id == "") {
+                        $("#MethedTable").find("tbody")[0].id = "serviceMethedRules";
+                    }
                     
                 }
                 $("#bg").css({
@@ -414,23 +418,6 @@
         $("#MethedAddForm").ajaxSubmit(addOrUpdateMethedTableBack(id));
     }
 
-    function updateOneRowBack(element, form) {
-        return {
-            type : "post",
-            success : function(data) {
-                
-                var form = $("#selectMockOperDefine");
-                var inputs = form.find("input");
-                inputs[0].value = data.id;
-                form.submit();
-
-            },
-            error : function() {
-                showErrorInfo(element,"出错啦！");
-            }
-        }
-    };
-
     function updateOneRow(element, form) {
         var needAjaxSubmit = false;
         var values = $("#" + form)[0];
@@ -448,14 +435,33 @@
         }
 
         if (needAjaxSubmit) {
-            element.disabled = true;
-            var height = $(document).serviceStatusInput;
-            $("#jquery_bg").css({
-                'display' : "block",
-                'height' : height
-            });
-            $("#query_hint").removeClass("hiddenElement");
+            /* showLoadingIcon(element); */
             $("#" + form).ajaxSubmit(updateOneRowBack(element, form));
+        }
+    };
+
+    function updateOneRowBack(element, form) {
+        return {
+            type : "post",
+            success : function(data) {
+                var values = $("#" + form)[0];
+                for (var index = 0; index < values.length; ++index) {
+                    if (values[index].className == "updateInput") {
+                        if (values[index].disabled == false) {
+                            values[index].disabled = true;
+                            element.innerText = "修改";
+                        }
+                    }
+                }
+ /*                var form = $("#selectMockOperDefine");
+                var inputs = form.find("input");
+                inputs[0].value = data.id;
+                form.submit(); */
+
+            },
+            error : function() {
+                showErrorInfo(element,"出错啦！");
+            }
         }
     };
 
@@ -493,6 +499,9 @@
 
                 if(array_values.indexOf(data.methodName) == -1){
                     var options = $("#selectMockRuleNames").find("option");
+                    if (options.length == 1){
+                        $("#serviceMethedRules").remove();
+                    }
                     for (var index = 0; index < options.length; index++) {
                         if(options[index].value == data.methodName) {
                             options[index].remove();
@@ -500,7 +509,7 @@
                         }
                     }
                 }
-                
+                checkboxAllIsNeedChange();
             },
             error : function() {
                 showErrorInfo(element,"出错啦！");
@@ -590,10 +599,14 @@
     function checkboxAllIsNeedChange() {
         var checkboxAllChecked = true;
         var checkboxs = $("#serviceMethedRules").find("input:checkbox");
-        for (var index = 0;index < checkboxs.length;index ++) {
-            if(checkboxs[index].checked == false) {
-                checkboxAllChecked = false;
+        if(checkboxs != null && checkboxs.length > 0) {
+            for (var index = 0;index < checkboxs.length;index ++) {
+                if(checkboxs[index].checked == false) {
+                    checkboxAllChecked = false;
+                }
             }
+        } else {
+            checkboxAllChecked = false;
         }
         $("#checkboxAll")[0].checked = checkboxAllChecked;
         refreshSelectCheckboxName();
@@ -738,12 +751,6 @@
     }
 
     $(document).ready(function() {
-
-        if("${mockOperDefine.mockServices[0].serviceStatus}" == "running") {
-            $("#onoffswitch").attr("checked","checked");
-        } else {
-            $("#onoffswitch").attr("");
-        }
         
         var w1, w2, outer, inner;
         outer = document.createElement('div');
@@ -780,7 +787,7 @@
         $("#selectMockRuleNames").multiselect({
             noneSelectedText: "选择测试项", 
             checkAllText: "全选", 
-            uncheckAllText: '全不选',
+            uncheckAllText: '清空',
             selectedList:2
         });
         
@@ -859,7 +866,8 @@
                         <td id="serviceStatus" class="serviceStatusTd">
                             <input style="display: none" type="text" name="serviceStatus" readonly="readonly" value="${mockServices.serviceStatus}" />
                             <div class="buttonswitch">
-                                <input class="buttonswitch-checkbox" id="onoffswitch" name="serviceStatus" type="checkbox" onclick='runningOrStopService(this)'>
+                                <input class="buttonswitch-checkbox" id="onoffswitch" type="checkbox" 
+                                    <c:if test='${mockServices.serviceStatus == "running"}'>checked</c:if> onclick='runningOrStopService(this)'>
                                 <label class="buttonswitch-label" for="onoffswitch">
                                     <span class="buttonswitch-inner" data-on="running" data-off="stop"></span>  
                                     <span class="buttonswitch-switch"></span>  
@@ -1243,8 +1251,8 @@
                                     </thead>
                                 </table>
                             </div>
-                            <div class="tableOverflow413">
-                                <table class="tableTdTable413">
+                            <div class="tableOverflow419">
+                                <table class="tableTdTable419">
                                     <tbody>
                                         <tr>
                                             <td id="mockTestMethodRule" class="divTd"></td>
