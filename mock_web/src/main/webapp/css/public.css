@@ -60,6 +60,10 @@ li,ul设置list-style: none;主要是取消默认的小圆点.不太好看
     text-align: right;
 }
 
+input:disabled{
+    background-color: #b3b3b3;
+}
+
 .checkfail {
     background-color: #e91e63;
     width: auto;
@@ -1605,4 +1609,86 @@ html {
     position: relative;
     top: 10px;
     left: -8px;
+}
+
+.buttonswitch {  
+    position: relative;  
+    float: left;   
+    width: 90px;  
+    margin: 0;  
+    -webkit-user-select:none;   
+    -moz-user-select:none;   
+    -ms-user-select: none;  
+}  
+  
+.buttonswitch-checkbox {  
+    display: none;  
+}  
+  
+.buttonswitch-label {  
+    display: block;   
+    overflow: hidden;   
+    cursor: pointer;  
+    border: 2px solid #999999;   
+    border-radius: 1px;
+}  
+  
+.buttonswitch-inner {  
+    display: block;   
+    width: 200%;   
+    margin-left: -100%;  
+    transition: margin 0.3s ease-in 0s;  
+}  
+  
+.buttonswitch-inner::before, .buttonswitch-inner::after {  
+    display: block;   
+    float: right;   
+    width: 50%;   
+    height: 16px;
+    padding: 0;   
+    line-height: 16px;
+    font-size: 14px;   
+    color: white;   
+    font-family:   
+    Trebuchet, Arial, sans-serif;   
+    font-weight: bold;  
+    box-sizing: border-box;  
+}  
+  
+.buttonswitch-inner::after {  
+    content: attr(data-on);  
+    padding-left: 10px;  
+    background-color: #00e500;   
+    color: #FFFFFF;  
+}  
+  
+.buttonswitch-inner::before {  
+    content: attr(data-off);  
+    padding-right: 24px;  
+    background-color: #EEEEEE;   
+    color: #999999;  
+    text-align: right;  
+}  
+  
+.buttonswitch-switch {  
+    position: absolute;   
+    display: block;   
+    width: 8px;
+    height: 8px;  
+    margin: 4px;  
+    background: #FFFFFF;  
+    top: 0;   
+    bottom: 0;  
+    right: 70px;  
+    border: 2px solid #999999;   
+    border-radius: 20px;  
+    transition: all 0.3s ease-in 0s;  
+}  
+  
+.buttonswitch-checkbox:checked + .buttonswitch-label .buttonswitch-inner {  
+    margin-left: 0;  
+}  
+  
+.buttonswitch-checkbox:checked + .buttonswitch-label .buttonswitch-switch {  
+    right: 0px;   
 }

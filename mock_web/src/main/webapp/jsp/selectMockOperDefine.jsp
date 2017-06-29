@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fun" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,20 +33,6 @@
         return {
             type : "post",
             success : function(data) {
-                var serviceStatus = data.serviceStatus;
-                if (serviceStatus == "running") {
-                    $("#serviceStatus").find("input")[0].value = "running";
-                    $("#serviceStatus").find("input").addClass("running");
-                    $("#serviceStatus").find("input").removeClass("stop");
-                    $("#running").addClass("hiddenElement");
-                    $("#stop").removeClass("hiddenElement");
-                } else {
-                    $("#serviceStatus").find("input")[0].value = "stop";
-                    $("#serviceStatus").find("input").addClass("stop");
-                    $("#serviceStatus").find("input").removeClass("running");
-                    $("#stop").addClass("hiddenElement");
-                    $("#running").removeClass("hiddenElement");
-                }
                 element.disabled = false;
                 $("#jquery_bg").css({
                     display : "none"
@@ -59,12 +45,12 @@
         }
     }
 
-    function runningOrStopService(serviceStatus, element) {
-        var form = $("#runningOrStopServiceFrom");
-        var inputs = form.find("input");
-        inputs[0].value = element.value;
-        inputs[1].value = serviceStatus;
-
+    function runningOrStopService(element) {
+        if ($(element).is(':checked')) {
+			$("#serviceStatus").find("input")[0].value = "running";
+        } else {
+			$("#serviceStatus").find("input")[0].value = "stop";
+        }
         element.disabled = true;
         var height = $(document).height();
         $("#jquery_bg").css({
@@ -73,6 +59,7 @@
         });
         $("#query_hint").removeClass("hiddenElement");
 
+        var form = $("#mockServicesForm");
         form.ajaxSubmit(runningOrStopServiceBack(element));
     }
 
@@ -399,6 +386,7 @@
                     }
                     
                     tempTr.appendTo("#MethedTable");
+                    $("#MethedTable").find("tbody")[0].id = "serviceMethedRules";
                     
                 }
                 $("#bg").css({
@@ -454,6 +442,7 @@
                     element.innerText = "提交";
                 } else {
                     needAjaxSubmit = true;
+                    break;
                 }
             }
         }
@@ -582,7 +571,7 @@
                     $("#mockTestResult").append("<div class='mockTestMethodRuleDiv'>" + data.context + "</div>");
                 }
             },
-            error : function(data) {
+            error : function() {
                 showErrorInfo(null,"出错啦！");
             }
         }
@@ -749,6 +738,12 @@
     }
 
     $(document).ready(function() {
+
+        if("${mockOperDefine.mockServices[0].serviceStatus}" == "running") {
+            $("#onoffswitch").attr("checked","checked");
+        } else {
+            $("#onoffswitch").attr("");
+        }
         
         var w1, w2, outer, inner;
         outer = document.createElement('div');
@@ -824,6 +819,7 @@
     <div id="bg" class="bg" onclick="hiddenDivTable()"></div>
     <div id="jquery_bg" class="bg"></div>
     <div class="holder" style="display: none;"></div>
+    <form id='mockServicesForm' action='<c:url value="/mvc/updateOrInsertMockService"/>' method="post">
     <table>
         <thead>
             <tr class="itemtr">
@@ -839,9 +835,9 @@
                 <th>应用名称</th>
                 <th>Group</th>
                 <th>Version</th>
-                <th>超时时间</th>
+                <th>超时时间(毫秒)</th>
                 <th>重试次数</th>
-                <th colspan="2">服务状态</th>
+                <th>服务状态</th>
                 <th style="width: 69px;">操作</th>
             </tr>
         </thead>
@@ -849,41 +845,36 @@
             <c:if test="${not empty mockOperDefine.mockServices}">
                 <c:forEach items="${mockOperDefine.mockServices}" var="mockServices">
                     <tr class="itemtr">
-                        <form id='mockServicesForm' action='<c:url value="/mvc/updateOrInsertMockService"/>' method="post">
-                            <td style="display: none" class="updateTd"><input disabled="true" class="updateInput" type="text" name="id" readonly="readonly" value="${mockServices.id}" /> <input name="id" type="hidden" value="${mockServices.id}" /></td>
-                            <td class="updateTd" style="display: none"><input disabled="true" class="updateInput" type="text" name="registryId" onclick='showDivTable("Registry")' id="RegistryId" readonly="readonly" value="${mockServices.registryId }" /></td>
-                            <td class="updateTd"><input disabled="true" class="updateInput" type="text" onclick='showDivTable("Registry")' id="RegistryName" readonly="readonly" value="${mockServices.registryProtocol }" /></td>
-                            <td class="updateTd" style="display: none"><input disabled="true" class="updateInput" type="text" name="protocolId" onclick='showDivTable("Protocol")' id="ProtocolId" readonly="readonly" value="${mockServices.protocolId }" /></td>
-                            <td class="updateTd"><input disabled="true" class="updateInput" type="text" onclick='showDivTable("Protocol")' id="ProtocolName" readonly="readonly" value="${mockServices.protocolName }" /></td>
-                            <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="serviceInterface" value="${mockServices.serviceInterface }" /></td>
-                            <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="applicationName" value="${mockServices.applicationName }" /></td>
-                            <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="groupName" value="${mockServices.groupName }" /></td>
-                            <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="version" value="${mockServices.version }" /></td>
-                            <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="timeout" value="${mockServices.timeout }" /></td>
-                            <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="retries" value="${mockServices.retries }" /></td>
-                            <td id="serviceStatus" class="serviceStatusTd"><input class="${mockServices.serviceStatus} serviceStatusInput" type="text" name="serviceStatus" readonly="readonly" value="${mockServices.serviceStatus}" /></td>
-                            <td class="serviceStatusTd">
-                                <button onclick='runningOrStopService("running",this)' ondblclick='if(document.all)event.cancelBubble=true;else event.stopPropagation();' class="serviceStatusButton runningButton <c:if test='${mockServices.serviceStatus == "running"}'>hiddenElement</c:if>"
-                                type="button" id="running" value="${mockServices.id}" <c:if test='${mockServices.id == null}'>disabled='disabled'</c:if>>running</button>
-                                <button onclick='runningOrStopService("stop",this)' ondblclick='if(document.all)event.cancelBubble=true;else event.stopPropagation();'
-                                class="serviceStatusButton stopButton <c:if test='${mockServices.serviceStatus == null || mockServices.serviceStatus == "stop"}'>hiddenElement</c:if>" type="button" id="stop" value="${mockServices.id}" <c:if test='${mockServices.id == null}'>disabled='disabled'</c:if>>stop</button>
-                            </td>
-                            <td class="buttonTd">
-                                <button class="updateButton mockServicesButton" type="button" onclick='updateOneRow(this,"mockServicesForm")' value="${mockServices.id}">${mockServices.id == null ? "新增" : "修改"}</button>
-                            </td>
-                        </form>
-                    </tr>
-                    <tr class="itemtr" style="display: none;">
-                        <td>
-                            <form id='runningOrStopServiceFrom' action='<c:url value="/mvc/updateOrInsertMockService"/>' method="post">
-                                <input type="hidden" name="id" value="${mockServices.id}" /> <input type="hidden" name="serviceStatus" />
-                            </form>
+                        <td style="display: none" class="updateTd"><input disabled="true" class="updateInput" type="text" name="id" readonly="readonly" value="${mockServices.id}" /> <input name="id" type="hidden" value="${mockServices.id}" /></td>
+                        <td class="updateTd" style="display: none"><input disabled="true" class="updateInput" type="text" name="registryId" onclick='showDivTable("Registry")' id="RegistryId" readonly="readonly" value="${mockServices.registryId }" /></td>
+                        <td class="updateTd"><input disabled="true" class="updateInput" type="text" onclick='showDivTable("Registry")' id="RegistryName" readonly="readonly" value="${mockServices.registryProtocol }" /></td>
+                        <td class="updateTd" style="display: none"><input disabled="true" class="updateInput" type="text" name="protocolId" onclick='showDivTable("Protocol")' id="ProtocolId" readonly="readonly" value="${mockServices.protocolId }" /></td>
+                        <td class="updateTd"><input disabled="true" class="updateInput" type="text" onclick='showDivTable("Protocol")' id="ProtocolName" readonly="readonly" value="${mockServices.protocolName }" /></td>
+                        <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="serviceInterface" value="${mockServices.serviceInterface }" /></td>
+                        <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="applicationName" value="${mockServices.applicationName }" /></td>
+                        <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="groupName" value="${mockServices.groupName }" /></td>
+                        <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="version" value="${mockServices.version }" /></td>
+                        <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="timeout" value="${mockServices.timeout }" /></td>
+                        <td class="updateTd"><input disabled="true" class="updateInput" type="text" name="retries" value="${mockServices.retries }" /></td>
+                        <td id="serviceStatus" class="serviceStatusTd">
+                            <input style="display: none" type="text" name="serviceStatus" readonly="readonly" value="${mockServices.serviceStatus}" />
+                            <div class="buttonswitch">
+                                <input class="buttonswitch-checkbox" id="onoffswitch" name="serviceStatus" type="checkbox" onclick='runningOrStopService(this)'>
+                                <label class="buttonswitch-label" for="onoffswitch">
+                                    <span class="buttonswitch-inner" data-on="running" data-off="stop"></span>  
+                                    <span class="buttonswitch-switch"></span>  
+                                </label>
+                            </div>
+                        </td>
+                        <td class="buttonTd">
+                            <button class="updateButton mockServicesButton" type="button" onclick='updateOneRow(this,"mockServicesForm")' value="${mockServices.id}">${mockServices.id == null ? "新增" : "修改"}</button>
                         </td>
                     </tr>
                 </c:forEach>
             </c:if>
         </tbody>
     </table>
+    </form>
     <div class='intervalDiv'></div>
     <div id='MethedDiv' class='subdiv'>
         <table id="MethedTable" class="tableAutoWidth">
@@ -994,8 +985,8 @@
                             </td>
                         </tr>
                     </c:forEach>
+                </tbody>
             </c:if>
-            </tbody>
         </table>
     </div>
     <div id='MethedAddDiv' class='hiddenElement popdiv'>

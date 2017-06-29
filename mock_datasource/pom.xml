@@ -25,6 +25,10 @@
 			<artifactId>mock_po</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.tony.mock</groupId>
 			<artifactId>mock_utils</artifactId>
 			<version>${project.version}</version>

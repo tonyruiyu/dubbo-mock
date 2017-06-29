@@ -302,7 +302,7 @@ public class DubboMockServiceTest extends TestBase {
         smr.setReturnMessage("{'1':{'name':'zxc','age':11}}");
         smritmes.add(smr);
 
-        when(serviceMethedRuleMapper.selectByExampleWithBLOBs(any(ServiceMethedRuleExample.class))).thenReturn(smritmes);
+        when(serviceMethedRuleMapper.selectByExample(any(ServiceMethedRuleExample.class))).thenReturn(smritmes);
         ReflectionTestUtils.setField(dubboMockServer, "serviceMethedRuleMapper", serviceMethedRuleMapper);
     }
 

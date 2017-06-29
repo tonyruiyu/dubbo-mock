@@ -54,7 +54,7 @@
 		<td><%=totalPage%>页 </td>
 		<td>跳转到</td>
 		<td class="input_li">
-			<input type="hidden"id="p_totalPage" value="<%=totalPage%>" />
+			<input type="hidden" id="p_totalPage" value="<%=totalPage%>" />
 			<input type="text" id="p_pageNo" style="width: 36px; height: 18px; padding: 0px 3px 0 3px; text-indent: 0px;" maxlength="5" value="<%=pageNo%>" />
 		</td>
 		<td>页</td>

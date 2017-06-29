@@ -1,34 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tony.test.mock.auto.mapper.MockTestParamMapper" >
-  <resultMap id="BaseResultMap" type="com.tony.test.mock.po.MockTestParam" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="par_key" property="parKey" jdbcType="VARCHAR" />
-    <result column="par_type" property="parType" jdbcType="VARCHAR" />
-    <result column="subject_id" property="subjectId" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tony.test.mock.auto.mapper.MockTestParamMapper">
+  <resultMap id="BaseResultMap" type="com.tony.test.mock.po.MockTestParam">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="par_key" jdbcType="VARCHAR" property="parKey" />
+    <result column="par_value" jdbcType="VARCHAR" property="parValue" />
+    <result column="par_type" jdbcType="VARCHAR" property="parType" />
+    <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.tony.test.mock.po.MockTestParam" extends="BaseResultMap" >
-    <result column="par_value" property="parValue" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -39,25 +37,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -68,182 +66,144 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
-    id, par_key, par_type, subject_id
+  <sql id="Base_Column_List">
+    id, par_key, par_value, par_type, subject_id
   </sql>
-  <sql id="Blob_Column_List" >
-    par_value
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.tony.test.mock.po.MockTestParamExample" >
+  <select id="selectByExample" parameterType="com.tony.test.mock.po.MockTestParamExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from mock_test_param
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tony.test.mock.po.MockTestParamExample" >
-    select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from mock_test_param
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from mock_test_param
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mock_test_param
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.tony.test.mock.po.MockTestParamExample" >
+  <delete id="deleteByExample" parameterType="com.tony.test.mock.po.MockTestParamExample">
     delete from mock_test_param
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tony.test.mock.po.MockTestParam" >
-    insert into mock_test_param (id, par_key, par_type, 
-      subject_id, par_value)
-    values (#{id,jdbcType=INTEGER}, #{parKey,jdbcType=VARCHAR}, #{parType,jdbcType=VARCHAR}, 
-      #{subjectId,jdbcType=INTEGER}, #{parValue,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.tony.test.mock.po.MockTestParam">
+    insert into mock_test_param (id, par_key, par_value, 
+      par_type, subject_id)
+    values (#{id,jdbcType=INTEGER}, #{parKey,jdbcType=VARCHAR}, #{parValue,jdbcType=VARCHAR}, 
+      #{parType,jdbcType=VARCHAR}, #{subjectId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.tony.test.mock.po.MockTestParam" >
+  <insert id="insertSelective" parameterType="com.tony.test.mock.po.MockTestParam">
     insert into mock_test_param
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="parKey != null" >
+      <if test="parKey != null">
         par_key,
       </if>
-      <if test="parType != null" >
-        par_type,
-      </if>
-      <if test="subjectId != null" >
-        subject_id,
-      </if>
-      <if test="parValue != null" >
+      <if test="parValue != null">
         par_value,
       </if>
+      <if test="parType != null">
+        par_type,
+      </if>
+      <if test="subjectId != null">
+        subject_id,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="parKey != null" >
+      <if test="parKey != null">
         #{parKey,jdbcType=VARCHAR},
       </if>
-      <if test="parType != null" >
+      <if test="parValue != null">
+        #{parValue,jdbcType=VARCHAR},
+      </if>
+      <if test="parType != null">
         #{parType,jdbcType=VARCHAR},
       </if>
-      <if test="subjectId != null" >
+      <if test="subjectId != null">
         #{subjectId,jdbcType=INTEGER},
-      </if>
-      <if test="parValue != null" >
-        #{parValue,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.tony.test.mock.po.MockTestParamExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.tony.test.mock.po.MockTestParamExample" resultType="java.lang.Long">
     select count(*) from mock_test_param
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update mock_test_param
-    <set >
-      <if test="record.id != null" >
+    <set>
+      <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.parKey != null" >
+      <if test="record.parKey != null">
         par_key = #{record.parKey,jdbcType=VARCHAR},
       </if>
-      <if test="record.parType != null" >
+      <if test="record.parValue != null">
+        par_value = #{record.parValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parType != null">
         par_type = #{record.parType,jdbcType=VARCHAR},
       </if>
-      <if test="record.subjectId != null" >
+      <if test="record.subjectId != null">
         subject_id = #{record.subjectId,jdbcType=INTEGER},
       </if>
-      <if test="record.parValue != null" >
-        par_value = #{record.parValue,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update mock_test_param
     set id = #{record.id,jdbcType=INTEGER},
       par_key = #{record.parKey,jdbcType=VARCHAR},
-      par_type = #{record.parType,jdbcType=VARCHAR},
-      subject_id = #{record.subjectId,jdbcType=INTEGER},
-      par_value = #{record.parValue,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update mock_test_param
-    set id = #{record.id,jdbcType=INTEGER},
-      par_key = #{record.parKey,jdbcType=VARCHAR},
+      par_value = #{record.parValue,jdbcType=VARCHAR},
       par_type = #{record.parType,jdbcType=VARCHAR},
       subject_id = #{record.subjectId,jdbcType=INTEGER}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tony.test.mock.po.MockTestParam" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.tony.test.mock.po.MockTestParam">
     update mock_test_param
-    <set >
-      <if test="parKey != null" >
+    <set>
+      <if test="parKey != null">
         par_key = #{parKey,jdbcType=VARCHAR},
       </if>
-      <if test="parType != null" >
+      <if test="parValue != null">
+        par_value = #{parValue,jdbcType=VARCHAR},
+      </if>
+      <if test="parType != null">
         par_type = #{parType,jdbcType=VARCHAR},
       </if>
-      <if test="subjectId != null" >
+      <if test="subjectId != null">
         subject_id = #{subjectId,jdbcType=INTEGER},
-      </if>
-      <if test="parValue != null" >
-        par_value = #{parValue,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tony.test.mock.po.MockTestParam" >
+  <update id="updateByPrimaryKey" parameterType="com.tony.test.mock.po.MockTestParam">
     update mock_test_param
     set par_key = #{parKey,jdbcType=VARCHAR},
-      par_type = #{parType,jdbcType=VARCHAR},
-      subject_id = #{subjectId,jdbcType=INTEGER},
-      par_value = #{parValue,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.tony.test.mock.po.MockTestParam" >
-    update mock_test_param
-    set par_key = #{parKey,jdbcType=VARCHAR},
+      par_value = #{parValue,jdbcType=VARCHAR},
       par_type = #{parType,jdbcType=VARCHAR},
       subject_id = #{subjectId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

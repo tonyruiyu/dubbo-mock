@@ -33,7 +33,7 @@
 		<property name="removeAbandonedOnBorrow" value="${mysql.removeAbandonedOnBorrow}" />
 		<property name="removeAbandonedTimeout" value="${mysql.removeAbandonedTimeout}" />
 		<property name="logAbandoned" value="${mysql.logAbandoned}" />
-		<property name="validationQuery" value="select 1 from dual" />
+		<property name="validationQuery" value="select 1 " />
 	</bean>
 
 	<bean id="mockFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

@@ -50,7 +50,7 @@ import com.tony.test.page.Page;
         MockTestParamExample example1 = new MockTestParamExample();
         MockTestParamExample.Criteria criteria1 = example1.createCriteria();
         criteria1.andSubjectIdIn(integers);
-        List<MockTestParam> params = mockTestParamMapper.selectByExampleWithBLOBs(example1);
+        List<MockTestParam> params = mockTestParamMapper.selectByExample(example1);
         for (MockTestSubject mockTestSubject : subs) {
             String subName = mockTestSubject.getTestSubjectTitle();
             Integer id = mockTestSubject.getId();
