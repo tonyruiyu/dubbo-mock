@@ -126,7 +126,7 @@
                         <option <c:if test="${page.params.serviceStatus == 'stop'}">selected='selected'</c:if> value="stop">stop</option>
                     </select></td>
                 <td class="queryButtonTd">
-                    <button type="submit">查询</button> <input type="hidden" id="pageNo" name="pageNo" value="${page == null ? 1 : page.pageNo}" /> <input type="hidden" id="pageSize" name="pageSize" value="${page == null ? 20 : page.pageSize}" />
+                    <button type="submit" id="searchClick">查询</button> <input type="hidden" id="pageNo" name="pageNo" value="${page == null ? 1 : page.pageNo}" /> <input type="hidden" id="pageSize" name="pageSize" value="${page == null ? 20 : page.pageSize}" />
                 </td>
             </tr>
         </table>
