@@ -1079,8 +1079,6 @@
                     <tr>
                         <td class="queryitem">方法名称</td>
                         <td><input name="methodName" type="text" /> <input type="hidden" name="id" /> <input type="hidden" name="serviceId" id="addServiceMethedRuleId" value="${mockOperDefine.mockServices[0].id}" /></td>
-                        <td class="queryitem">执行优先级</td>
-                        <td><input name="execSort" type="text" /></td>
                     </tr>
                     <tr>
                         <td class="queryitem">条件脚本</td>
