@@ -390,6 +390,11 @@
                     tempTr.appendTo("#MethedTable");
                     if($("#MethedTable").find("tbody")[0].id == "") {
                         $("#MethedTable").find("tbody")[0].id = "serviceMethedRules";
+                        $("#serviceMethedRules").sortable({
+                            stop: function( event, ui ) {
+                                sortableStop(this);
+                            }
+                        });
                     }
                     
                 }
@@ -464,6 +469,33 @@
             }
         }
     };
+    
+    //表单转对象
+    $.fn.form2object = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (this.value) {
+                o[this.name] = this.value;
+            }
+        });
+        return o;
+    };
+
+    //对象转表单
+    $.fn.object2form = function (obj) {
+        for (var key in obj) {
+            $(this).find("input[name='" + key + "']").val(obj[key]);
+            $(this).find("textarea[name='" + key + "']").val(obj[key]);
+            $(this).find("select[name='" + key + "']").val(obj[key]);
+        }
+    };
+
+    //将数据显示到form表单
+    //$("xxxform").object2form(data);
+
+    //从form表单获取数据
+    //var data = $("xxxform").form2object();
 
     function showDetailDiv(element) {
         var offset = $(element).offset();
@@ -749,8 +781,48 @@
             tempTr.find("[name='mockTestType']").val(mockTestInfoValues[index].parType);
         }
     }
-
+    
+    function sortableStop(element){
+        showLoadingIcon(element);
+        var tr = $(element).find("tr");
+        var trlength = tr.length;
+        var doneSize = 1;
+        $.each(tr, function (key,value) {
+            var idDiv = $(value).find("div[id='id']");
+            var serviceIdDiv = $(value).find("div[id='serviceId']");
+            var execSortDiv = $(value).find("div[id='execSort']");
+            var index = key + 1;
+            $.ajax({
+                type: "post",
+                url: "updateOrInsertServiceMethedRule",
+                data: "id=" + idDiv[0].innerHTML + "&execSort=" + index + "&serviceId=" + serviceIdDiv[0].innerHTML,
+                success: function (data) {
+                    execSortDiv[0].innerHTML = index;
+                    if(doneSize < trlength){
+                        doneSize ++ ;
+                    } else {
+                        hiddenLoadingIcon(element);
+                    }
+                },
+                error : function() {
+                    showErrorInfo(element,"出错啦！");
+                    if(doneSize < trlength){
+                        doneSize ++ ;
+                    } else {
+                        hiddenLoadingIcon(element);
+                    }
+                }
+            });
+        });
+    }
+    
     $(document).ready(function() {
+        
+        $("#serviceMethedRules").sortable({
+            stop: function( event, ui ) {
+                sortableStop(this);
+            }
+        });
         
         var w1, w2, outer, inner;
         outer = document.createElement('div');
@@ -820,14 +892,14 @@
 </script>
 </head>
 <body>
-    <form id="selectMockOperDefine" action='<c:url value="/mvc/selectMockOperDefine"/>' method="get">
+    <form id="selectMockOperDefine" action='<c:url value="/mvc/selectMockOperDefine"/>' method="post">
         <input type="hidden" name="selectid" value="-1" />
     </form>
     <div id="bg" class="bg" onclick="hiddenDivTable()"></div>
     <div id="jquery_bg" class="bg"></div>
     <div class="holder" style="display: none;"></div>
     <form id='mockServicesForm' action='<c:url value="/mvc/updateOrInsertMockService"/>' method="post">
-    <table>
+    <table class="tableAutoWidth">
         <thead>
             <tr class="itemtr">
                 <td colspan="13">
@@ -845,7 +917,7 @@
                 <th>超时时间(毫秒)</th>
                 <th>重试次数</th>
                 <th>服务状态</th>
-                <th style="width: 69px;">操作</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody id="itemContainer">
@@ -884,119 +956,117 @@
     </table>
     </form>
     <div class='intervalDiv'></div>
-    <div id='MethedDiv' class='subdiv'>
-        <table id="MethedTable" class="tableAutoWidth">
-            <thead>
-                <tr class="itemtr">
-                    <td colspan="6">
-                    <span class="spanleft">
-                        <h3 align="left">服务Mock规则</h3>
-                    </span>
-                    <span class="spanright">
-                        <button id="testServiceMethedRuleButton" <c:if test='${mockOperDefine.mockServices[0].id == null}'>disabled='disabled'</c:if> class="addButton mockServicesButton" onclick='openMockTestTable("MockTest");selectMockTestInfos()' type="button">测试</button>
-                    </span>
-                    <span class="spanright" style="margin: 0px 3px;">
-                        <select id="selectMockRuleNames" multiple="multiple" onchange="setCheckboxCheckValue()">
-                            <c:forEach items="${mockOperDefine.mockRuleNames}" var="ruleName">
-                                <option value="${ruleName}">${ruleName}</option>
-                            </c:forEach>
-                        </select>
-                    </span>
-                    </td>
-                    <td class="buttonTd">
-                        <button id="addServiceMethedRuleButton" <c:if test='${mockOperDefine.mockServices[0].id == null}'>disabled='disabled'</c:if> class="addButton mockServicesButton" onclick='openMethedUpdateTable(this,"MethedAdd")' type="button">新增</button>
-                    </td>
-                </tr>
-                <tr class="queryitem">
-                    <th style="display: none">ID</th>
-                    <th style="display: none">服务ID</th>
-                    <th>方法名称</th>
-                    <th>条件脚本</th>
-                    <th>返回报文</th>
-                    <th>更新时间</th>
-                    <th>执行优先级</th>
-                    <th class="checkboxtd"><input type="checkbox" id="checkboxAll" name="checkboxAll" onclick="changeCheckBoxAll(this)"/></th>
-                    <th style="width: 69px;">操作</th>
-                </tr>
-                <tr class="itemtr hiddenElement" id="MethedAddTr">
-                    <td style="display: none" class="divWidth30">
-                        <div class="updateDiv2Row" id="id"></div>
-                    </td>
-                    <td style="display: none" class="divWidth100">
-                        <div class="updateDiv2Row" id="serviceId"></div>
-                    </td>
-                    <td class="divWidth300">
-                        <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="methodName"></div>
-                    </td>
-                    <td class="divWidth300">
-                        <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="whenScript"></div>
-                    </td>
-                    <td class="divWidth300">
-                        <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="returnMessage"></div>
-                    </td>
-                    <td>
-                        <div class="updateDiv2Row" id="updateTime"></div>
-                    </td>
-                    <td>
-                        <div class="updateDiv2Row" id="execSort"></div>
-                    </td>
-                    <td class="checkboxtd">
-                        <input name="mockTestCheckbox" id="" type="checkbox" onchange="checkboxAllIsNeedChange()" value="" />
-                    </td>
-                    <td class="buttonTd">
-                        <button class="updateButton mockServicesButton" onclick='openMethedUpdateTable(this,"MethedAdd")' type="button">修改</button>
-                        <form id='deleteServiceMethedRule' action='<c:url value="/mvc/deleteServiceMethedRule"/>' method="post">
-                            <input type="hidden" name="id" value="" /> 
-                            <input type="hidden" name="serviceId" value="" />
-                            <input type="hidden" name="methodName" value="" />
-                            <button class="deleteButtonOneRow mockServicesButton" type="button" onclick="deleteMethedRule(this)">删除</button>
-                        </form>
-                    </td>
-                </tr>
-            </thead>
-            <c:if test="${not empty mockOperDefine.serviceMethedRules}">
-                <tbody id="serviceMethedRules">
-                    <c:forEach items="${mockOperDefine.serviceMethedRules}" var="methed">
-                        <tr class="itemtr" id="MethedTr${methed.id}">
-                            <td style="display: none" class="divWidth30">
-                                <div class="updateDiv2Row" id="id">${methed.id}</div>
-                            </td>
-                            <td style="display: none" class="divWidth100">
-                                <div class="updateDiv2Row" id="serviceId">${methed.serviceId}</div>
-                            </td>
-                            <td class="divWidth300">
-                                <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="methodName">${methed.methodName}</div>
-                            </td>
-                            <td class="divWidth300">
-                                <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="whenScript">${methed.whenScript}</div>
-                            </td>
-                            <td class="divWidth300">
-                                <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="returnMessage">${methed.returnMessage}</div>
-                            </td>
-                            <td>
-                                <div class="updateDiv2Row" id="updateTime">${dateUtil.date2String(methed.updateTime,"yyyy-MM-dd HH:mm:ss")}</div>
-                            </td>
-                            <td>
-                                <div class="updateDiv2Row" id="execSort">${methed.execSort}</div>
-                            </td>
-                            <td class="checkboxtd">
-                                <input name="mockTestCheckbox" id="${methed.methodName}" type="checkbox" onchange="checkboxAllIsNeedChange()" value="${methed.id}"/>
-                            </td>
-                            <td class="buttonTd">
-                                <button class="updateButton mockServicesButton" onclick='openMethedUpdateTable(this,"MethedAdd")' value="${methed.id}" type="button">修改</button>
-                                <form id='deleteServiceMethedRule' action='<c:url value="/mvc/deleteServiceMethedRule"/>' method="post">
-                                    <input type="hidden" name="id" value="${methed.id}" /> 
-                                    <input type="hidden" name="serviceId" value="${methed.serviceId}" />
-                                    <input type="hidden" name="methodName" value="${methed.methodName}" />
-                                    <button class="deleteButtonOneRow mockServicesButton" type="button" onclick="deleteMethedRule(this)">删除</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </c:if>
-        </table>
-    </div>
+    <table id="MethedTable" >
+        <thead>
+            <tr class="itemtr">
+                <td colspan="6">
+                <span class="spanleft">
+                    <h3 align="left">服务Mock规则</h3>
+                </span>
+                <span class="spanright">
+                    <button id="testServiceMethedRuleButton" <c:if test='${mockOperDefine.mockServices[0].id == null}'>disabled='disabled'</c:if> class="addButton mockServicesButton" onclick='openMockTestTable("MockTest");selectMockTestInfos()' type="button">测试</button>
+                </span>
+                <span class="spanright" style="margin: 0px 3px;">
+                    <select id="selectMockRuleNames" multiple="multiple" onchange="setCheckboxCheckValue()">
+                        <c:forEach items="${mockOperDefine.mockRuleNames}" var="ruleName">
+                            <option value="${ruleName}">${ruleName}</option>
+                        </c:forEach>
+                    </select>
+                </span>
+                </td>
+                <td class="buttonTd">
+                    <button id="addServiceMethedRuleButton" <c:if test='${mockOperDefine.mockServices[0].id == null}'>disabled='disabled'</c:if> class="addButton mockServicesButton" onclick='openMethedUpdateTable(this,"MethedAdd")' type="button">新增</button>
+                </td>
+            </tr>
+            <tr class="queryitem">
+                <th style="display: none" class="divWidth30">ID</th>
+                <th style="display: none" class="divWidth100">服务ID</th>
+                <th class="divWidth300">方法名称</th>
+                <th class="divWidth300">条件脚本</th>
+                <th class="divWidth300">返回报文</th>
+                <th class="divWidth150">更新时间</th>
+                <th class="divWidth100">执行优先级</th>
+                <th class="checkboxtd"><input type="checkbox" id="checkboxAll" name="checkboxAll" onclick="changeCheckBoxAll(this)"/></th>
+                <th>操作</th>
+            </tr>
+            <tr class="itemtr hiddenElement" id="MethedAddTr">
+                <td style="display: none" class="divWidth30">
+                    <div class="updateDiv2Row" id="id"></div>
+                </td>
+                <td style="display: none" class="divWidth100">
+                    <div class="updateDiv2Row" id="serviceId"></div>
+                </td>
+                <td class="divWidth300">
+                    <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="methodName"></div>
+                </td>
+                <td class="divWidth300">
+                    <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="whenScript"></div>
+                </td>
+                <td class="divWidth300">
+                    <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="returnMessage"></div>
+                </td>
+                <td class="divWidth150">
+                    <div class="updateDiv2Row" id="updateTime"></div>
+                </td>
+                <td class="divWidth100">
+                    <div class="updateDiv2Row" id="execSort"></div>
+                </td>
+                <td class="checkboxtd">
+                    <input name="mockTestCheckbox" id="" type="checkbox" onchange="checkboxAllIsNeedChange()" value="" />
+                </td>
+                <td class="buttonTd">
+                    <button class="updateButton mockServicesButton" onclick='openMethedUpdateTable(this,"MethedAdd")' type="button">修改</button>
+                    <form id='deleteServiceMethedRule' action='<c:url value="/mvc/deleteServiceMethedRule"/>' method="post">
+                        <input type="hidden" name="id" value="" /> 
+                        <input type="hidden" name="serviceId" value="" />
+                        <input type="hidden" name="methodName" value="" />
+                        <button class="deleteButtonOneRow mockServicesButton" type="button" onclick="deleteMethedRule(this)">删除</button>
+                    </form>
+                </td>
+            </tr>
+        </thead>
+        <c:if test="${not empty mockOperDefine.serviceMethedRules}">
+            <tbody id="serviceMethedRules" >
+                <c:forEach items="${mockOperDefine.serviceMethedRules}" var="methed">
+                    <tr class="itemtr" id="MethedTr${methed.id}">
+                        <td style="display: none" class="divWidth30">
+                            <div class="updateDiv2Row" id="id">${methed.id}</div>
+                        </td>
+                        <td style="display: none" class="divWidth100">
+                            <div class="updateDiv2Row" id="serviceId">${methed.serviceId}</div>
+                        </td>
+                        <td class="divWidth300">
+                            <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="methodName">${methed.methodName}</div>
+                        </td>
+                        <td class="divWidth300">
+                            <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="whenScript">${methed.whenScript}</div>
+                        </td>
+                        <td class="divWidth300">
+                            <div ondblclick="showDetailDiv(this)" class="updateDiv2Row" id="returnMessage">${methed.returnMessage}</div>
+                        </td>
+                        <td class="divWidth150">
+                            <div class="updateDiv2Row" id="updateTime">${dateUtil.date2String(methed.updateTime,"yyyy-MM-dd HH:mm:ss")}</div>
+                        </td>
+                        <td class="divWidth100">
+                            <div class="updateDiv2Row" id="execSort">${methed.execSort}</div>
+                        </td>
+                        <td class="checkboxtd">
+                            <input name="mockTestCheckbox" id="${methed.methodName}" type="checkbox" onchange="checkboxAllIsNeedChange()" value="${methed.id}"/>
+                        </td>
+                        <td class="buttonTd">
+                            <button class="updateButton mockServicesButton" onclick='openMethedUpdateTable(this,"MethedAdd")' value="${methed.id}" type="button">修改</button>
+                            <form id='deleteServiceMethedRule' action='<c:url value="/mvc/deleteServiceMethedRule"/>' method="post">
+                                <input type="hidden" name="id" value="${methed.id}" /> 
+                                <input type="hidden" name="serviceId" value="${methed.serviceId}" />
+                                <input type="hidden" name="methodName" value="${methed.methodName}" />
+                                <button class="deleteButtonOneRow mockServicesButton" type="button" onclick="deleteMethedRule(this)">删除</button>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </c:if>
+    </table>
     <div id='MethedAddDiv' class='hiddenElement popdiv'>
         <div class='poptopdiv'>
             <form id="MethedAddForm" action="<c:url value="/mvc/updateOrInsertServiceMethedRule"/>" method="post">

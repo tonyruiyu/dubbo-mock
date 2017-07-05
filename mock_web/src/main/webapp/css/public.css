@@ -288,6 +288,10 @@ body, ul, p, dl, dd, dt, h {
     width: 100px;
 }
 
+.divWidth150 {
+    width: 150px;
+}
+
 .divWidth50 {
     width: 50px;
 }
@@ -393,7 +397,6 @@ table {
     margin:0px;
     border-collapse: collapse;
     border: none;
-    width: 100%;
     padding: 0px;
 }
 
@@ -424,15 +427,15 @@ text-align:left;表格里的内容居左
 *******************************************/
 TD {
     margin: 0px;
-    font-size: 12px;
+    padding: 2px;
+    font-size: 13px;
     font-family: "微软雅黑";
-    width:auto;
     border: solid #ccc 1px;
     VERTICAL-ALIGN: inherit;
     text-align:left;
     color: #222;
+    width:auto;
     white-space:nowrap;/* 不换行 */
-    padding: 3px;
     height: 18px;
     line-height: 18px;
 }
@@ -456,7 +459,7 @@ th {
     font-size: 13px;
     font-family: "微软雅黑";
     border: solid #ccc 1px;
-    VERTICAL-ALIGN: middle;
+    VERTICAL-ALIGN: inherit;
     text-align:center;
     color: #222;
     width: auto;
@@ -1478,13 +1481,6 @@ AJAX在线编辑DIV容器
     line-height:28px;
     text-indent:0px;
     margin: 3px 3px 3px 3px;
-}
-
-/*子表样式*/
-.subdiv {
-    height:auto;
-    overflow: auto;
-    position:relative;
 }
 
 .tableAutoWidth {

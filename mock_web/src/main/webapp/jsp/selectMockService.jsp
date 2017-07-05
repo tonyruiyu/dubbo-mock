@@ -98,7 +98,7 @@
         <input type="hidden" name="selectid" value="-1" />
     </form>
     <form id="queryForm" action='<c:url value="/mvc/selectMockService"/>' method="post">
-        <table>
+        <table class="tableAutoWidth">
             <tr>
                 <td colspan="6"><h3 align="left">配置服务查询</h3></td>
                 <td class="buttonTd">
@@ -133,7 +133,7 @@
     </form>
     <tags:page pageRange="5" pageNo="${page == null ? 1 : page.pageNo}" pageSize="${page == null ? 20 : page.pageSize}" totalPage="${page == null ? 0 : page.totalPage}" totalRecord="${page == null ? 0 : page.totalRecord}" formId="queryForm" />
     <div class="holder" style="display: none;"></div>
-    <table>
+    <table class="tableAutoWidth">
         <thead>
             <tr class="queryitem">
                 <th>ID</th>

@@ -22,7 +22,7 @@ import com.tony.test.service.ServiceMethedRuleService;
     public List<ServiceMethedRule> selectServiceMethedRule(ServiceMethedRule serviceMethedRule) {
         ServiceMethedRuleExample example = new ServiceMethedRuleExample();
         ReflectUtil.invokeSelectParams(example, serviceMethedRule);
-        example.setOrderByClause(" method_name,exec_sort");
+        example.setOrderByClause("exec_sort");
         return serviceMethedRuleMapper.selectByExample(example);
     }
 
@@ -32,10 +32,8 @@ import com.tony.test.service.ServiceMethedRuleService;
             return 0;
         }
         serviceMethedRule.setUpdateTime(new Date());
-        int count = serviceMethedRuleMapper.updateByPrimaryKey(serviceMethedRule);
+        int count = serviceMethedRuleMapper.updateByPrimaryKeySelective(serviceMethedRule);
         if (count <= 0) {
-            ServiceMethedRuleExample example = new ServiceMethedRuleExample();
-            ReflectUtil.invokeSelectParams(example, serviceMethedRule);
             count = serviceMethedRuleMapper.insert(serviceMethedRule);
             List<ServiceMethedRule> services = selectServiceMethedRule(serviceMethedRule);
             int id = 0;
