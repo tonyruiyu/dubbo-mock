@@ -973,7 +973,7 @@
     </table>
     </form>
     <div class='intervalDiv'></div>
-    <table id="MethedTable" >
+    <table id="MethedTable">
         <thead>
             <tr class="itemtr">
                 <td colspan="6">
@@ -1004,7 +1004,7 @@
                 <th class="divWidth150">更新时间</th>
                 <th class="divWidth100">执行优先级</th>
                 <th class="checkboxtd"><input type="checkbox" id="checkboxAll" name="checkboxAll" onclick="changeCheckBoxAll(this)"/></th>
-                <th>操作</th>
+                <th class="buttonTd">操作</th>
             </tr>
             <tr class="itemtr hiddenElement" id="MethedAddTr">
                 <td style="display: none" class="divWidth30">
@@ -1043,7 +1043,7 @@
             </tr>
         </thead>
         <c:if test="${not empty mockOperDefine.serviceMethedRules}">
-            <tbody id="serviceMethedRules" >
+            <tbody id="serviceMethedRules">
                 <c:forEach items="${mockOperDefine.serviceMethedRules}" var="methed">
                     <tr class="itemtr" id="MethedTr${methed.id}">
                         <td style="display: none" class="divWidth30">
