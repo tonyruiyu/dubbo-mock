@@ -387,7 +387,13 @@
                         $('#selectMockRuleNames').multiselect("refresh"); 
                     }
                     
-                    tempTr.appendTo("#MethedTable");
+                    
+                    addTr("serviceMethedRules", 0, tempTr);
+                    /* var serviceMethedRules = ("#MethedTable");
+                    serviceMethedRules.innerHTML = tempTr.innerHTML + serviceMethedRules.innerHTML;
+                    tempTr.prepend("#serviceMethedRules"); */
+                    
+                    
                     if($("#MethedTable").find("tbody")[0].id == "") {
                         $("#MethedTable").find("tbody")[0].id = "serviceMethedRules";
                         $("#serviceMethedRules").sortable({
@@ -405,6 +411,17 @@
             }
         }
     };
+    
+    function addTr(tab, row, tempTr) {  
+        //获取table最后一行 $("#tab tr:last")
+        //获取table第一行 $("#tab tr").eq(0)
+        //获取table倒数第二行 $("#tab tr").eq(-2)
+         
+        var $tr = $("#" + tab + " tr").eq(row);
+        if ($tr.size() == 0) { alert("指定的table id或行数不存在！"); 
+            return; 
+        } $tr.before(tempTr); 
+    }
 
     function addOrUpdateMethedTable() {
         var id = "";

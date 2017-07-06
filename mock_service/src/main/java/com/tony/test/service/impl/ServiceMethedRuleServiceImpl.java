@@ -22,7 +22,7 @@ import com.tony.test.service.ServiceMethedRuleService;
     public List<ServiceMethedRule> selectServiceMethedRule(ServiceMethedRule serviceMethedRule) {
         ServiceMethedRuleExample example = new ServiceMethedRuleExample();
         ReflectUtil.invokeSelectParams(example, serviceMethedRule);
-        example.setOrderByClause("exec_sort");
+        example.setOrderByClause("exec_sort, update_time desc");
         return serviceMethedRuleMapper.selectByExample(example);
     }
 
