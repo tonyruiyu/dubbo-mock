@@ -401,6 +401,7 @@
                                 sortableStop(this);
                             }
                         });
+                        $("#serviceMethedRules").disableSelection();
                     }
                     
                 }
@@ -840,6 +841,7 @@
                 sortableStop(this);
             }
         });
+        $("#serviceMethedRules").disableSelection();
         
         var w1, w2, outer, inner;
         outer = document.createElement('div');
