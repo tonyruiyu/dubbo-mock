@@ -34,19 +34,7 @@
 	</dependencies>
 	<build>
 		<finalName>mock_web</finalName>
-		<plugins>
-			<plugin>
-				<groupId>cn.tony</groupId>
-				<artifactId>tools-maven-plugin</artifactId>
-				<version>0.0.3</version>
-				<configuration>
-					<server-host>10.100.22.16</server-host>
-					<password>1234qwer</password>
-					<tomcatHome>/opt/tomcat-mock</tomcatHome>
-					<finalName>mock_web</finalName>
-				</configuration>
-			</plugin>
-		</plugins>
+		
 	</build>
 
 
