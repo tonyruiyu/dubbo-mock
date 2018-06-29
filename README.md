@@ -1,7 +1,7 @@
 
 # DUBBO MOCK SERVER 使用说明
 
-DUBBO MOCK SERVER 是一个基于web的dubbo服务的mock平台，可以同步可视化见面，采用groovy脚本语言动态配置mock规则，并且提供了对groovy脚本配置是否正确的自我检查测试的功能。
+DUBBO MOCK SERVER 是一个基于web的dubbo服务的mock平台，可以通过可视化界面，采用groovy脚本语言动态配置mock规则，并且提供了对groovy脚本配置是否正确的自我检查测试的功能。
 
 
 ## 选择数据库数据库按照路径(如果有需要)
