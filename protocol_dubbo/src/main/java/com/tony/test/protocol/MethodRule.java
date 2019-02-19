@@ -39,7 +39,7 @@ public class MethodRule {
         for (int i = 0; i < serviceMethedRules.size(); i++) {
             String when = serviceMethedRules.get(i).getWhenScript();
             String thenMessage = serviceMethedRules.get(i).getReturnMessage();
-            scriptContext.append("if( ").append(when).append(") {").append("print \"").append(removeLine(thenMessage)).append("\";\n return;}\n ");
+            scriptContext.append("if( ").append(when).append(") {").append("print \"\"\"").append(removeLine(thenMessage)).append("\"\"\";\n return;}\n ");
         }
         scriptContext.append("print null;\n");
         scriptContext.append(" %>");

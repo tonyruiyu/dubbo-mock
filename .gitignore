@@ -28,3 +28,8 @@ target
 .git*
 .classpath
 
+## .gitignore for intellij
+*.iml
+*.ipr
+*.iws
+.idea/
