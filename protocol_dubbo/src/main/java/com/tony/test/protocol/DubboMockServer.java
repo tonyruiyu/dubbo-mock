@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 
 import org.I0Itec.zkclient.ZkClient;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -28,6 +30,7 @@ import com.tony.test.mock.po.ServiceMethedRuleExample;
 
 @Service
 public class DubboMockServer implements MockServer {
+	private static final Logger logger = LoggerFactory.getLogger(DubboMockServer.class);
 
 	public static final String RUNNING = "running";
 
@@ -196,19 +199,17 @@ public class DubboMockServer implements MockServer {
 
 	@Override
 	public synchronized void start() {
-		try {
-			List<MockService> items = selectStartedService();
-			loopStartService(items);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		List<MockService> items = selectStartedService();
+		loopStartService(items);
 	}
 
 	private List<MockService> selectStartedService() {
 		MockServiceExample example = new MockServiceExample();
 		example.or().andServiceStatusEqualTo(RUNNING);
 		List<MockService> items = mockServiceMapper.selectByExample(example);
-		Assert.notEmpty(items, "没有需要启动的服务");
+		if (items.size() == 0) {
+			logger.warn("running services not found, you need to create one and start it");
+		}
 		return items;
 	}
 
