@@ -1,6 +1,7 @@
 package com.tony.test.controller;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -54,9 +55,11 @@ public class BootStartServer implements InitializingBean, DisposableBean {
 	}
 
 	private void initSql() {
+		Connection conn = null;
+		Statement stmt = null;
 		try {
-			Connection conn = mockDataSource.getConnection();
-			Statement stmt = conn.createStatement();
+			conn = mockDataSource.getConnection();
+			stmt = conn.createStatement();
 
 			List<String> aa = IOUtils.readLines(getClass().getClassLoader().getResourceAsStream("sqlite.sql"));
 			String s = StringUtils.join(aa, "\r\n");
@@ -64,12 +67,26 @@ public class BootStartServer implements InitializingBean, DisposableBean {
 
 			for (int i = 0; i < sqls.length; i++) {
 				String sql = sqls[i];
-				System.out.println("初始化sql : " + sql);
 				stmt.execute(sql);
+				System.out.println("初始化sql : " + sql);
 			}
-			stmt.close();
-			conn.close();
 		} catch (Exception e) {
+			// ignore
+		} finally {
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// ignore
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// ignore
+				}
+			}
 		}
 	}
 
