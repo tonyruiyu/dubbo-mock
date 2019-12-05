@@ -367,7 +367,7 @@
 		<cglib_version>2.2</cglib_version>
 		<jedis_version>2.6.2</jedis_version>
 		<servlet_version>3.1.0</servlet_version>
-		<jackson_version>2.6.3</jackson_version>
+		<jackson_version>2.10.0</jackson_version>
 		<commons_io_version>2.4</commons_io_version>
 		<commons_lang_version>2.5</commons_lang_version>
 		<dubbo_version>2.5.3</dubbo_version>
