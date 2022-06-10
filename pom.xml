@@ -370,7 +370,7 @@
 		<jackson_version>2.10.0</jackson_version>
 		<commons_io_version>2.4</commons_io_version>
 		<commons_lang_version>2.5</commons_lang_version>
-		<dubbo_version>2.5.3</dubbo_version>
+		<dubbo_version>2.6.12</dubbo_version>
 		<dubbo_json_version>0.0.3.1-json-hessian</dubbo_json_version>
 		<javassist_version>3.16.1-GA</javassist_version>
 		<menagerie.version>1.1</menagerie.version>
